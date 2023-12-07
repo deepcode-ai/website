@@ -1,0 +1,29 @@
+[build]
+publish = "public"
+command = "npm run build"
+functions = "functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+  buildDir = "public"
+  # Append missing trailing slash to pretty URL
+  trailingSlash = true
+  exclude = [
+    '**/style-archive/',
+    '**/admin/**',
+    '**/authors/**',
+    '**/ctas/**',
+    '**/framework/**',
+    '**/labels/**',
+    '**/codemod-engines/**',
+    '**/migration-resources/**',
+    '**/migration-features/**',
+    '**/testimonials/**'
+  ]

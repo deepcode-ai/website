@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html data-wf-page="655e2c5e532816ea525219a1" data-wf-site="655e2c5e532816ea5252198e" lang="en"><head><link rel="preconnect" crossorigin="true" href="https://assets.website-files.com">{%- seo seo -%}
+  <meta charset="utf-8">
+  
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/components.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/codemod-registry-8b6f26f378e46b7a612bcf.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]  }});</script>
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="{{ settings.site.favicon | default: "/assets/images/favicon.png" }}" rel="shortcut icon" type="image/x-icon">
+  <link href="{{ settings.site.apple_touch_icon | default: "/assets/images/webclip.png" }}" rel="apple-touch-icon">
+{{ settings.site.header_additional_content }}{%- include "partials/_site-css-variables" -%}<style>.w-video.w-embed {
+            aspect-ratio: 16 / 9;
+        }</style></head>
+<body class="body">
+  <div class="wrap_sticky">
+    <div data-animation="default" class="navbar-outer-2 w-nav" data-easing2="ease-out-quart" data-easing="ease-out-quart" data-collapse="medium" data-w-id="82d7f75a-c728-b1ae-005d-182c107aa215" role="banner" data-duration="450">
+      <div class="navbar-container-2">
+        <a href="{{ links.2f }}" class="ms-logo-link w-nav-brand"><img src="{{ images.2449300f.url }}" loading="lazy" alt="{{ images.2449300f.alt | trim | escape }}" height="40" class="logo-img-5"></a>
+        <nav role="navigation" class="navbar-menu overflow-hidden w-nav-menu">
+          <a href="{{ links.-3dea1d25 }}" class="navbar-link w-nav-link">{{ texts.50622285 }}</a>
+          <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+            <div class="navbar-link for-dropdown w-dropdown-toggle">
+              <div class="icon-dropdown w-icon-dropdown-toggle"></div>
+              <div>{{ texts.7397cc93 }}</div>
+            </div>
+            <nav class="dropdown-list w-dropdown-list">
+              <div class="dropdown-grid">
+                <a href="{{ links.-5be4108f }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.596486a1 }}</a>
+                <a href="{{ links.-321e94de }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.66d4f126 }}</a>
+                <a href="{{ links.-3f316fbd }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.-77e9fdf1 }}</a>
+                <a href="{{ links.52ce7af1 }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.10500 }}</a>
+              </div>
+            </nav>
+          </div>
+          <a href="{{ links.-d9445a8 }}" class="navbar-link w-nav-link">{{ texts.507137a6 }}</a>
+          <a href="{{ links.-599fd5b8 }}" target="_blank" class="navbar-link w-nav-link">{{ texts.20965b }}</a>
+          <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+            <div class="navbar-link for-dropdown w-dropdown-toggle">
+              <div class="icon-dropdown w-icon-dropdown-toggle"></div>
+              <div>{{ texts.24af75 }}</div>
+            </div>
+            <nav class="dropdown-list right-side w-dropdown-list">
+              <div class="dropdown-grid">
+                <a href="{{ links.6dcf58d9 }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.-7bc27f6b }}</a>
+                <a href="{{ links.7ecb8309 }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.1fa3c2 }}</a>
+                <a href="{{ links.20f6ac18 }}" target="_blank" class="dropdown-link w-dropdown-link">{{ texts.7f258fe3 }}</a>
+              </div>
+            </nav>
+          </div>
+          <a href="{{ links.16bdc13e }}" class="navbar-link w-nav-link">{{ texts.-64104400 }}</a>
+        </nav>
+        <div class="navbar_menu-button w-nav-button">
+          <div class="menu-icon">
+            <div class="menu-icon_line-top"></div>
+            <div class="menu-icon-line-middle">
+              <div class="menu-icon-line-middle-inner"></div>
+            </div>
+            <div class="menu-icon-line-bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="section">
+    <div class="w-layout-blockcontainer container hero w-container">
+      <div class="hero-flex-wrapper">
+        <div class="hero-left-wrapper">
+          <div class="hero-content-conatiner">
+            <div class="hero-title-wrapper">
+              <h1 class="h1 in-line">{{ f_migration-title }}</h1>
+            </div>
+            <div target="_blank" class="home-migration-card-wrapper glow-hover hero hide-desktop">
+              {%- unless f_migrate-to-image -%}<div class="home-migration-card-images-wrapper">
+                <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ f_migrate-from-image.url }}" alt="{{ f_migrate-from-title }}" class="home-migration-card-framework-image small"></div>
+              </div>{%- endunless -%}
+              {%- if f_migrate-to-image -%}<div class="home-migration-card-images-wrapper registry">
+                <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ f_migrate-from-image.url }}" alt="{{ f_migrate-from-title }}" class="home-migration-card-framework-image small">
+                  <div class="feature-card-paragraph bold">{{ f_migrate-from-title }}</div>
+                </div><img src="{{ images.5418dd34.url }}" loading="lazy" alt="{{ images.5418dd34.alt | trim | escape }}" class="migration-right-arrow-icon two-items small">
+                <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ f_migrate-to-image.url }}" alt="{{ f_migrate-to-title }}" class="home-migration-card-framework-image small">
+                  <div class="feature-card-paragraph bold">{{ f_migrate-to-title }}</div>
+                </div>
+              </div>{%- endif -%}
+              {%- unless f_migrate-to-image -%}<div class="home-migration-card-images-wrapper">
+                <div class="before-migration-flex-wrapper">
+                  <div class="feature-card-paragraph bold large">{{ f_migrate-from-title }}</div>
+                </div><img src="{{ images.5418dd34.url }}" loading="lazy" alt="{{ images.5418dd34.alt | trim | escape }}" class="migration-right-arrow-icon small">
+                <div class="before-migration-flex-wrapper">
+                  <div class="feature-card-paragraph bold large">{{ f_migrate-to-title }}</div>
+                </div>
+              </div>{%- endunless -%}
+            </div>
+            <p class="paragraph">{{ f_migration-hero-description }}</p>
+            <a href="{{ links.-491d655b }}" class="hero-button w-inline-block">
+              <div>{{ texts.98447 }}</div>
+            </a>
+          </div>
+        </div>
+        <div class="hero-right-wrapper justify-center">
+          <div target="_blank" class="home-migration-card-wrapper glow-hover hero">
+            {%- unless f_migrate-to-image -%}<div class="home-migration-card-images-wrapper">
+              <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ f_migrate-from-image.url }}" alt="{{ f_migrate-from-title }}" class="home-migration-card-framework-image small"></div>
+            </div>{%- endunless -%}
+            {%- if f_migrate-to-image -%}<div class="home-migration-card-images-wrapper registry">
+              <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ f_migrate-from-image.url }}" alt="{{ f_migrate-from-title }}" class="home-migration-card-framework-image small">
+                <div class="feature-card-paragraph bold">{{ f_migrate-from-title }}</div>
+              </div><img src="{{ images.5418dd34.url }}" loading="lazy" alt="{{ images.5418dd34.alt | trim | escape }}" class="migration-right-arrow-icon two-items small">
+              <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ f_migrate-to-image.url }}" alt="{{ f_migrate-to-title }}" class="home-migration-card-framework-image small">
+                <div class="feature-card-paragraph bold">{{ f_migrate-to-title }}</div>
+              </div>
+            </div>{%- endif -%}
+            {%- unless f_migrate-to-image -%}<div class="home-migration-card-images-wrapper">
+              <div class="before-migration-flex-wrapper">
+                <div class="feature-card-paragraph bold large">{{ f_migrate-from-title }}</div>
+              </div><img src="{{ images.5418dd34.url }}" loading="lazy" alt="{{ images.5418dd34.alt | trim | escape }}" class="migration-right-arrow-icon small">
+              <div class="before-migration-flex-wrapper">
+                <div class="feature-card-paragraph bold large">{{ f_migrate-to-title }}</div>
+              </div>
+            </div>{%- endunless -%}
+          </div><img loading="lazy" src="{{ f_migration-image.url }}" alt="{{ f_migration-title }}" class="migration-hero-image hidden">
+        </div>
+      </div>
+    </div>
+  </section>
+  {% assign refs = f_migration-features %}{%- if refs -%}<section class="section">
+    <div class="w-layout-blockcontainer container w-container">
+      <div data-w-id="8f7d2218-4b32-a9dc-88b4-59b9716e409c" style="opacity:0" class="why-migrate-wrapper">
+        <h2 class="centered">{{ texts.7e7ae42b }}</h2>
+        {%- assign migration-featuresOfMigrations = f_migration-features | resolveMultiReferences -%}<div class="w-dyn-list">
+          {%- unless migration-featuresOfMigrations.length == 0 -%}<div role="list" class="migration-features-wrapper w-dyn-items">
+            {%- for item in migration-featuresOfMigrations -%}<div role="listitem" class="w-dyn-item">
+              <div class="migration-feature-card-wrapper">{%- if item.data.f_feature-image -%}<img loading="lazy" src="{{ item.data.f_feature-image.url }}" alt="{{ item.data.f_feature-image.alt }}" class="migration-feature-icon hidden">{%- endif -%}{%- unless item.data.f_feature-image -%}<img src="{{ images.55e4d5a0.url }}" loading="lazy" alt="{{ images.55e4d5a0.alt | trim | escape }}" class="hidden">{%- endunless -%}
+                <h3 class="migration-feature-heading">{{ item.data.f_feature-title }}</h3>
+                <div class="feature-card-paragraph w-richtext">{{ item.templateContent | markdown | markdown }}</div>
+              </div>
+            </div>{%- endfor -%}
+          </div>{%- endunless -%}
+          {%- if migration-featuresOfMigrations.length == 0 -%}<div class="hidden-empty-state w-dyn-empty">
+            <div>{{ texts.3d503d2b }}</div>
+          </div>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>{%- endif -%}
+  <section class="section">
+    <div class="w-layout-blockcontainer container w-container">
+      <div class="why-migrate-wrapper">
+        <div class="why-migrate-header-wrapper">
+          <div data-w-id="777ce28b-ca6d-34cd-4346-2786834d04f7" style="opacity:0" class="content-wrap_center mw-800">
+            <div class="in-line-wrapper">
+              <h1 class="h2 in-line">{{ f_migration-title }}</h1>
+              <h1 class="h2 in-line">{{ texts.574 }}<span class="gradient-span">{{ texts.-4639b9b5 }}</span>{{ texts.-654d7875 }}</h1>
+            </div>
+            <div class="spacer_l"></div>
+            <div class="paragraph w-richtext">{{ content | markdown }}</div>
+          </div>
+        </div>
+        <div id="w-node-c68db33d-749d-4578-7013-7d0254f7771a-525219a1" class="migration-codemods-cards-wrapper">
+          {%- assign collection = collections.automations | filter: "f_labels,idin,cms/DYN_CONTEXT_FIELD:f_labels", "ALL", page.inputPath | limit: 2 | sort: "-created-on" -%}<div id="w-node-_92a0366d-62a8-03d4-27a2-9256b9f588b2-525219a1" class="collection-list-wrapper w-dyn-list">
+            {%- unless collection.length == 0 -%}<div role="list" class="codemods-gallery-wrapper _3-column w-dyn-items">
+              {%- for item in collection -%}<div role="listitem" class="grow w-dyn-item">
+                <div class="codemod-feature-card">
+                  <div class="codemod-feature-card-content-wrapper"><img src="{{ images.55e4d5a0.url }}" loading="lazy" alt="{{ images.55e4d5a0.alt | trim | escape }}" class="inverted hidden"><img src="{{ images.55e4d5a0.url }}" loading="lazy" alt="{{ images.55e4d5a0.alt | trim | escape }}" class="hidden">
+                    <h3 class="migration-feature-heading codemod">{{ item.data.title }}</h3>
+                    <div class="rich-text-block w-richtext">{{ item.templateContent | markdown | markdown }}</div>
+                  </div>
+                  <a href="{{ item.url }}" class="main-button w-inline-block">
+                    <div>{{ texts.-1272519c }}</div>
+                  </a>
+                </div>
+              </div>{%- endfor -%}
+            </div>{%- endunless -%}
+            {%- if collection.length == 0 -%}<div class="hidden-empty-state w-dyn-empty">
+              <div>{{ texts.3d503d2b }}</div>
+            </div>{%- endif -%}
+          </div>
+          <a id="w-node-a999c5bd-588e-78e9-5be7-50f33e5c8308-525219a1" href="{{ f_automations-filter-url }}" class="migration-automations-card-wrapper w-inline-block">
+            <div class="explore-more-content-wrapper">
+              <div class="home-migration-card-images-wrapper">
+                <div class="before-migration-flex-wrapper"><img loading="lazy" src="{{ images.-3cb3d212.url }}" alt="{{ images.-3cb3d212.alt | trim | escape }}" class="home-migration-card-framework-image"></div>
+              </div>
+              <div class="home-migration-card-images-wrapper">
+                <div>
+                  <div class="feature-card-paragraph bold whitesmoke large in-line">{{ texts.4b568e2a }}</div>
+                  {%- assign frameworkOfMigrations = f_framework | resolveReference -%}<div class="feature-card-paragraph bold whitesmoke large in-line">{{ frameworkOfMigrations.data.title }}</div>
+                  <div class="feature-card-paragraph bold whitesmoke large in-line">{{ texts.7bfe8e3c }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="main-button white">
+              <div>{{ texts.-6084ebfe }}</div>
+            </div>
+          </a>
+        </div>
+        <div data-w-id="d0d50cf1-0503-5752-4b30-90313cfa8d79" style="opacity:0" class="more-codemods-wrapper hide">
+          <div class="codemod-feature-card wide">
+            <a href="{{ f_automations-filter-url }}" class="more-codemods-card w-inline-block"><img src="{{ images.-4b6c3cba.url }}" loading="lazy" alt="{{ images.-4b6c3cba.alt | trim | escape }}" class="more-codemods-framework-image">
+              <h3 class="more-codemods-card-title">{{ texts.1f7b3736 }}<span class="gradient-span">{{ texts.11ba93a5 }}</span>{{ texts.7cda }}<span class="gradient-span purple">{{ texts.2f668079 }}</span>{{ texts.-2bcbf66e }}</h3>
+              <div class="in-line-wrapper">
+                <p class="more-automations-card-paragraph centered in-line">{{ texts.-366aabe3 }}</p>
+                <p class="more-automations-card-paragraph centered in-line">{{ f_migration-title }}</p>
+                <p class="more-automations-card-paragraph centered in-line">{{ texts.d9e8d92 }}</p>
+              </div>
+              <div target="_blank" class="main-button hover-glow">
+                <div>{{ texts.-573cacbe }}</div>
+              </div>
+            </a>
+            <a href="{{ links.23 }}" class="grid-button w-button">{{ texts.703e0200 }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section hide">
+    <div class="w-layout-blockcontainer container w-container">
+      <div data-w-id="34a9a805-6ada-9d78-8e90-87e0307735d4" style="opacity:0" class="why-migrate-wrapper">
+        <div class="why-migrate-header-wrapper">
+          <div data-w-id="34a9a805-6ada-9d78-8e90-87e0307735d6" style="opacity:0" class="content-wrap_center mw-800">
+            <h1 class="h2">{{ texts.-4412f708 }}</h1>
+            <div class="spacer_l"></div>
+            <p class="paragraph">{{ texts.68cc1da5 }}</p>
+          </div>
+        </div>
+        <div data-w-id="34a9a805-6ada-9d78-8e90-87e0307735e0" style="opacity:0" class="codemods-gallery-wrapper">
+          <div id="w-node-_34a9a805-6ada-9d78-8e90-87e0307735e1-525219a1" class="codemod-feature-card"><img src="{{ images.-178a07a7.url }}" loading="lazy" alt="{{ images.-178a07a7.alt | trim | escape }}" class="platform-type-image">
+            <h3 class="migration-feature-heading codemod">{{ texts.-6e39d540 }}</h3>
+            <div class="in-line-wrapper">
+              <p class="feature-card-paragraph codemod in-line">{{ texts.1426b }}</p>
+              <p class="feature-card-paragraph codemod in-line">{{ f_migration-title }}</p>
+              <p class="feature-card-paragraph codemod in-line">{{ texts.184018bf }}</p>
+            </div>
+            <a target="_blank" href="{{ links.-402fab7e }}" class="main-button w-inline-block">
+              <div>{{ texts.35192858 }}</div>
+            </a>
+          </div>
+          <div id="w-node-_34a9a805-6ada-9d78-8e90-87e0307735ea-525219a1" class="codemod-feature-card"><img src="{{ images.3fa43d88.url }}" loading="lazy" alt="{{ images.3fa43d88.alt | trim | escape }}" class="platform-type-image">
+            <h3 class="migration-feature-heading codemod">{{ texts.-44b57031 }}</h3>
+            <div class="in-line-wrapper">
+              <p class="feature-card-paragraph codemod in-line">{{ texts.6d5efee5 }}</p>
+              <p class="feature-card-paragraph codemod in-line">{{ f_migration-title }}</p>
+              <p class="feature-card-paragraph codemod in-line">{{ texts.-426a0530 }}</p>
+            </div>
+            <a target="_blank" href="{{ links.52ce7af1 }}" class="main-button w-inline-block">
+              <div>{{ texts.-be135cd }}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="section-standard">
+    <div class="div-standard">
+      <div class="content-wrap_center">
+        <div id="w-node-_5affb400-1422-152c-88dc-258b31f71207-525219a1" class="content-wrap_center mw-800">
+          <h2 class="h2-3">{{ texts.162fe0fe }}</h2>
+          <div class="spacer_xs-3"></div>
+          <p class="paragraph">{{ texts.-6efb41a3 }}</p>
+          <div class="spacer_xs"></div>
+          <a target="_blank" href="{{ links.-2ab382d3 }}" class="slack-link-block w-inline-block">
+            <div class="button-3 secondary github">
+              <div>{{ texts.-39173ad0 }}</div><img src="{{ images.-775b37d0.url }}" loading="lazy" alt="{{ images.-775b37d0.alt | trim | escape }}" class="slack-logo">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% assign refs = f_migration-resources %}{%- if refs -%}<section class="section">
+    <div class="w-layout-blockcontainer container w-container">
+      <div data-w-id="92be51f0-2763-f6aa-eda5-83309492a699" style="opacity:0" class="why-migrate-wrapper">
+        <div class="why-migrate-header-wrapper">
+          <div data-w-id="92be51f0-2763-f6aa-eda5-83309492a69b" style="opacity:0" class="content-wrap_center mw-800">
+            <h1 class="h2">{{ texts.-1e126417 }}</h1>
+            <div class="spacer_l"></div>
+            <p class="paragraph">{{ texts.6eeb2690 }}</p>
+          </div>
+        </div>
+        {%- assign migration-resourcesOfMigrations = f_migration-resources | resolveMultiReferences -%}<div class="w-dyn-list">
+          {%- unless migration-resourcesOfMigrations.length == 0 -%}<div role="list" class="blog-gallery-wrapper w-dyn-items">
+            {%- for item in migration-resourcesOfMigrations -%}<div role="listitem" class="w-dyn-item">
+              <div class="blog-card-wrapper">
+                <div class="blog-card-content-wrapper">
+                  <h3 class="migration-feature-heading">{{ item.data.f_resource-title }}</h3>
+                  <div class="feature-card-paragraph w-richtext">{{ item.templateContent | markdown | markdown }}</div>
+                </div>
+                <div class="feature-card-bottom-wrapper">
+                  <a target="_blank" href="{{ item.data.f_resource-link }}" class="main-button w-inline-block">
+                    <div>{{ texts.3137c131 }}</div>
+                  </a><img loading="lazy" src="{{ item.data.f_author-image.url }}" alt="{{ item.data.f_author-image.alt }}" class="author-image">
+                </div>
+              </div>
+            </div>{%- endfor -%}
+          </div>{%- endunless -%}
+          {%- if migration-resourcesOfMigrations.length == 0 -%}<div class="hidden-empty-state w-dyn-empty">
+            <div>{{ texts.3d503d2b }}</div>
+          </div>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>{%- endif -%}
+  <section id="migrations-section" class="section">
+    <div class="w-layout-blockcontainer container no-padding-bottom w-container">
+      <div class="why-migrate-wrapper">
+        <div class="why-migrate-header-wrapper">
+          <div class="content-wrap_center mw-800">
+            <h1 class="h2">{{ texts.35fc894a }}</h1>
+            <div class="spacer_l"></div>
+            <p class="paragraph">{{ texts.184d8d6b }}<span class="semi-bold">{{ texts.-3b72caf7 }}</span>{{ texts.26ca5699 }}<em> </em>{{ texts.5dd1ef56 }}</p>
+          </div>
+        </div>
+        {% assign refs = f_testimonials %}{%- if refs -%}<div class="success-stories-wrapper">
+          <div class="testimonials-wrap">
+            {%- assign testimonialsOfMigrations = f_testimonials | resolveMultiReferences -%}<div class="w-dyn-list">
+              {%- unless testimonialsOfMigrations.length == 0 -%}<div role="list" class="success-stories-grid w-dyn-items">
+                {%- for item in testimonialsOfMigrations -%}<div role="listitem" class="w-dyn-item">
+                  <div data-w-id="5ae74f72-fef3-a31f-94b6-f4af1317093b" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="success-story-card-wrapper">
+                    <div class="image-wrapper---br-top position-relative"><img src="{{ item.data.f_person-image.url }}" alt="{{ item.data.f_person-name }}" class="width-100">
+                      <div class="testimonial-logo-badge"><img src="{{ item.data.f_company-logo.url }}" width="90" alt="{{ item.data.f_company-logo.alt }}" class="testimonial-card-logo"></div>
+                    </div>
+                    <div class="success-story-card-description-wrapper">
+                      <div class="w-richtext">{{ item.templateContent | markdown | markdown }}</div>
+                      <div>
+                        <div class="text-200 bold color-neutral-800 mg-bottom-8px">{{ item.data.f_person-name }}</div>
+                        <div class="text-200 color-accent-1 list">{{ item.data.f_person-position }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>{%- endfor -%}
+              </div>{%- endunless -%}
+              {%- if testimonialsOfMigrations.length == 0 -%}<div class="hidden-empty-state w-dyn-empty">
+                <div>{{ texts.3d503d2b }}</div>
+              </div>{%- endif -%}
+            </div>
+          </div>
+        </div>{%- endif -%}
+        <div id="migration-hook" class="content-wrap_center">
+          {%- if f_enterprise-migration-section-call-description -%}<div data-w-id="208c28ce-2be4-fb55-8c80-bd2d15782326" style="opacity:0" class="content-wrap_center mw-800">
+            <div class="w-richtext">{{ f_enterprise-migration-section-call-description | markdown }}</div>
+          </div>{%- endif -%}
+          <div class="spacer_xs-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact-section" class="section contact-form">
+    <div class="w-layout-blockcontainer container no-padding w-container">
+      <div class="why-migrate-wrapper">
+        <div class="why-migrate-header-wrapper vertical">
+          <div class="w-container">
+            <div class="spacer_xs-3"></div>
+            <div data-w-id="208c28ce-2be4-fb55-8c80-bd2d1578232a" style="opacity:0" class="w-layout-grid grid-2-columns contact-v1">
+              <div>
+                <div class="subtitle">{{ texts.7f274abe }}</div>
+                <h1 class="contact-form-heading">{{ texts.-43d993f }}<br>{{ texts.26c620d5 }}</h1>
+                <p class="mg-bottom-40px no-padding-bottom">{{ texts.-63d040c3 }}<br></p>
+              </div>
+              <div id="w-node-_208c28ce-2be4-fb55-8c80-bd2d15782348-525219a1">
+                <div class="card form w-form">
+                  <form id="wf-form-migration-form" name="wf-form-migration-form" data-name="migration_" method="get" class="form-2" data-wf-page-id="655e2c5e532816ea525219a1" data-wf-element-id="65a11b98-9de6-9be7-a2a3-f63bdf954eca" data-netlify="true" data-ajax="true" data-content-type="application/x-www-form-urlencoded"><label for="name-field" class="form-label">{{ texts.24eeab }}</label><input type="text" class="form-input w-input" maxlength="256" name="Name-field" data-name="Name-field" placeholder="Enter your name" id="name-field"><label for="email-field" class="form-label">{{ texts.3ff5b7c }}</label><input type="email" class="form-input w-input" maxlength="256" name="Email-field" data-name="Email-field" placeholder="Enter your email" id="email-field"><label for="company-field" class="form-label">{{ texts.-64202ba3 }}</label><input type="text" class="form-input w-input" maxlength="256" name="Company-field" data-name="Company-field" placeholder="Enter your company" id="company-field"><label for="migration-field-2" class="form-label hidden">{{ texts.-3916a00f }}</label>
+                    <div class="hidden w-embed"><input type="text" class="form-input w-input" maxlength="256" name="Migration Required" data-name="Migration" placeholder="Enter the migration required" id="migration-required" value="{{ f_migration-title }}"></div><label for="message-field" class="form-label">{{ texts.51b6cf2f }}</label><textarea id="message-field" name="Message-field" maxlength="5000" data-name="Message-field" placeholder="Please type your message here..." class="text-area w-input"></textarea><input type="submit" value="Submit" data-wait="Please wait..." class="main-button large full-width contact w-button">
+                  </form>
+                  <div class="success-message-2 w-form-done">
+                    <div class="success-content-wrapper"><img src="{{ images.-3b599675.url }}" loading="lazy" alt="{{ images.-3b599675.alt | trim | escape }}">
+                      <div class="success-message-text">{{ texts.616f2143 }}</div>
+                    </div>
+                  </div>
+                  <div class="w-form-fail">
+                    <div>{{ texts.-7c112e99 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="div-block">
+                <div>
+                  <div class="text-300 bold footer-title">{{ texts.-30376fd1 }}</div>
+                  <div class="inner-container _400px">
+                    <div class="w-layout-grid grid-1-column">
+                      <a href="{{ links.95edf21 }}" class="card-link-icon w-inline-block"><img src="{{ images.2173831.url }}" alt="{{ images.2173831.alt | trim | escape }}" class="square-icon mg-right-16px mg-bottom-16px-mb">
+                        <div>
+                          <div class="text-200 color-neutral-600 mg-bottom-8px">{{ texts.7bec143e }}</div>
+                          <div class="text-200 bold">{{ texts.585f0519 }}</div>
+                        </div>
+                      </a>
+                      <a href="{{ links.-4abbf7b3 }}" class="card-link-icon w-inline-block"><img src="{{ images.-3f06943.url }}" alt="{{ images.-3f06943.alt | trim | escape }}" class="square-icon mg-right-16px mg-bottom-16px-mb">
+                        <div>
+                          <div class="text-200 color-neutral-600 mg-bottom-8px">{{ texts.3e0e7c2 }}</div>
+                          <div class="text-200 bold">{{ texts.-73d87c70 }}</div>
+                        </div>
+                      </a>
+                      <a href="{{ links.-36ff12ed }}" class="card-link-icon w-inline-block"><img src="{{ images.59f51b3b.url }}" alt="{{ images.59f51b3b.alt | trim | escape }}" class="square-icon mg-right-16px mg-bottom-16px-mb">
+                        <div>
+                          <div class="text-200 color-neutral-600 mg-bottom-8px">{{ texts.52bb1188 }}</div>
+                          <div class="text-200 bold">{{ texts.e4e4eb7 }}</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-w-id="208c28ce-2be4-fb55-8c80-bd2d1578236c" style="opacity:0" class="migrate-cta hidden">
+            <div class="cta-v2-content-wrapper---brix">
+              <div class="split-content---brix left-cta-v2---brix vertical">
+                <h2 class="title---brix cta-v2-title---brix">{{ texts.-43d993f }}<br>{{ texts.26c620d5 }}</h2>
+                <p>{{ texts.-63d040c3 }}</p>
+              </div>
+              <div class="split-content---brix right-cta-v2--brix">
+                <a href="{{ links.-d9445a8 }}" target="_blank" class="cta-button w-button">{{ texts.-447a915f }}<span class="no-break">{{ texts.2192 }}</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="section-standard">
+    <div class="div-standard">
+      <div class="content-wrap_center">
+        <div id="w-node-_0bdaeabc-788c-3bd5-7354-7cd03a7d21b5-525219a1" class="content-wrap_center mw-800">
+          <h2 class="h2-3">{{ texts.37e7284f }}</h2>
+          <div class="spacer_xs-3"></div>
+          <p class="paragraph">{{ texts.15e70d50 }}</p>
+          <div class="spacer_xs"></div>
+          <a target="_blank" href="{{ links.-68d3b33c }}" class="slack-link-block w-inline-block">
+            <div class="button-3 secondary slack">
+              <div>{{ texts.-698d3041 }}</div><img src="{{ images.-2f6e845a.url }}" loading="lazy" alt="{{ images.-2f6e845a.alt | trim | escape }}" class="slack-logo">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="footer-light">
+    <div class="container no-padding">
+      <div class="footer-wrapper-two">
+        <a href="{{ links.23 }}" class="footer-brand w-inline-block"><img src="{{ images.-58dc0911.url }}" loading="lazy" alt="{{ images.-58dc0911.alt | trim | escape }}" class="logo-img-6"></a>
+        <div class="footer-block-two">
+          <div class="footer-title">{{ texts.-64202ba3 }}</div>
+          <a href="{{ links.16bdc13e }}" class="footer-link-two">{{ texts.-64104400 }}</a>
+          <a href="{{ links.6dcf58d9 }}" target="_blank" class="footer-link-two">{{ texts.-7bc27f6b }}</a>
+          <a href="{{ links.52569957 }}" class="footer-link-two">{{ texts.-3fbde6f6 }}</a>
+          <a href="{{ links.4772a6d0 }}" class="footer-link-two">{{ texts.-3e157255 }}</a>
+          <a href="{{ links.7fe45151 }}" class="footer-link-two">{{ texts.-764b68de }}</a>
+        </div>
+        <div class="footer-block-two">
+          <div class="footer-title">{{ texts.-289a8973 }}</div>
+          <a href="{{ links.-3dea1d25 }}" class="footer-link-two">{{ texts.50622285 }}</a>
+          <a href="{{ links.-321e94de }}" class="footer-link-two">{{ texts.-76f38e5a }}</a>
+          <a href="{{ links.-599fd5b8 }}" class="footer-link-two">{{ texts.20965b }}</a>
+          <a href="{{ links.7ecb8309 }}" class="footer-link-two">{{ texts.1fa3c2 }}</a>
+          <a href="{{ links.-5be4108f }}" class="footer-link-two">{{ texts.596486a1 }}</a>
+          <a href="{{ links.-3f316fbd }}" class="footer-link-two">{{ texts.-77e9fdf1 }}</a>
+        </div>
+      </div>
+      <div class="footer-divider-two"></div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">{{ texts.-78dddcc6 }}</div>
+        <div class="footer-social-block-two">
+          <div class="w-layout-grid social-link-wrap">
+            <a rel="nofllow" target="_blank" href="{{ links.4c77e47b }}" class="social-link w-inline-block"><img src="{{ images.-267be297.url }}" loading="lazy" alt="{{ images.-267be297.alt | trim | escape }}" class="social-icon"></a>
+            <a target="_blank" href="{{ links.20f6ac18 }}" class="social-link w-inline-block"><img src="{{ images.-775b37d0.url }}" loading="lazy" alt="{{ images.-775b37d0.alt | trim | escape }}" class="social-icon"></a>
+            <a rel="nofollow" target="_blank" href="{{ links.-e3381a8 }}" class="social-link w-inline-block">
+              <div class="social-icon w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3ZM8 18C8.27614 18 8.5 17.7761 8.5 17.5V10.5C8.5 10.2239 8.27614 10 8 10H6.5C6.22386 10 6 10.2239 6 10.5V17.5C6 17.7761 6.22386 18 6.5 18H8ZM7.25 9C6.42157 9 5.75 8.32843 5.75 7.5C5.75 6.67157 6.42157 6 7.25 6C8.07843 6 8.75 6.67157 8.75 7.5C8.75 8.32843 8.07843 9 7.25 9ZM17.5 18C17.7761 18 18 17.7761 18 17.5V12.9C18.0325 11.3108 16.8576 9.95452 15.28 9.76C14.177 9.65925 13.1083 10.1744 12.5 11.1V10.5C12.5 10.2239 12.2761 10 12 10H10.5C10.2239 10 10 10.2239 10 10.5V17.5C10 17.7761 10.2239 18 10.5 18H12C12.2761 18 12.5 17.7761 12.5 17.5V13.75C12.5 12.9216 13.1716 12.25 14 12.25C14.8284 12.25 15.5 12.9216 15.5 13.75V17.5C15.5 17.7761 15.7239 18 16 18H17.5Z" fill="CurrentColor"></path>
+                </svg></div>
+            </a>
+            <a rel="nofollow" target="_blank" href="{{ links.-63fe80f3 }}" class="social-link w-inline-block"><img src="{{ images.-4741a959.url }}" loading="lazy" alt="{{ images.-4741a959.alt | trim | escape }}" class="social-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/assets/js/codemod-registry-8b6f26f378e46b7a612bcf.js" type="text/javascript"></script>
+
+<script src="/assets/js/udesly-11ty.min.js" async="" defer=""></script>{{ settings.site.footer_additional_content }}</body></html>

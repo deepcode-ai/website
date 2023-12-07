@@ -1,0 +1,4875 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: automations
+    label: Codemods
+    folder: cms/automations
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Short Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_slug-name
+        label: slug-name
+        widget: string
+        required: false
+      - hint: ''
+        name: f_long-description
+        label: Long Description
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_github-link
+        label: GitHub Link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_vs-code-link
+        label: VS Code Link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_codemod-studio-link
+        label: Codemod Studio Link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_cli-command
+        label: CLI Command
+        widget: string
+        required: false
+      - hint: ''
+        name: f_framework
+        label: Framework
+        widget: relation
+        required: false
+        collection: framework
+        value_field: cms/framework/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - hint: ''
+        name: f_codemod-engine
+        label: Codemod Engine
+        widget: relation
+        required: false
+        collection: codemod_engines
+        value_field: cms/codemod-engines/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - hint: ''
+        name: f_change-mode-2
+        label: Change Mode
+        widget: select
+        required: false
+        options:
+          - label: Autonomous
+            value: Autonomous
+          - label: Assistive
+            value: Assistive
+      - hint: ''
+        name: f_estimated-time-saving
+        label: Estimated time saving
+        widget: string
+        required: false
+      - hint: (bullet list is preferred)
+        name: f_applicability-criteria
+        label: Applicability criteria
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_labels
+        label: Labels
+        widget: relation
+        required: false
+        collection: labels
+        value_field: cms/labels/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_verified-codemod
+        label: Verified Codemod
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_author
+        label: Author
+        widget: relation
+        required: false
+        collection: authors
+        value_field: cms/authors/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - hint: ''
+        name: f_changelog
+        label: Changelog
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_order-rank
+        label: Order Rank
+        widget: number
+        required: false
+      - hint: ''
+        name: f_featured
+        label: Featured
+        widget: boolean
+        required: false
+        default: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: automations
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[automations].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: migrations
+    label: Migrations
+    folder: cms/migrations
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Automations Section Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_framework
+        label: Framework
+        widget: relation
+        required: false
+        collection: framework
+        value_field: cms/framework/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - hint: ''
+        name: f_migration-title
+        label: Migration Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_migration-hero-description
+        label: Migration Hero Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_migration-image
+        label: Migration Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_migration-features
+        label: Migration Features
+        widget: relation
+        required: false
+        collection: migration_features
+        value_field: cms/migration-features/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_migration-resources
+        label: Migration Resources
+        widget: relation
+        required: false
+        collection: migration_resources
+        value_field: cms/migration-resources/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_testimonials
+        label: Testimonials
+        widget: relation
+        required: false
+        collection: testimonials
+        value_field: cms/testimonials/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_enterprise-migration-section-call-description
+        label: Enterprise Migration Section Call Description
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_labels
+        label: Labels
+        widget: relation
+        required: false
+        collection: labels
+        value_field: cms/labels/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_migrate-from-title
+        label: Migrate From Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_migrate-from-image
+        label: Migrate From Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_migrate-to-title
+        label: Migrate To Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_migrate-to-image
+        label: Migrate To Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_migration-card-short-description
+        label: Migration Card Short Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_featured-in-home
+        label: Featured in Home
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_order-rank
+        label: Order Rank
+        widget: number
+        required: false
+      - hint: ''
+        name: f_is-cta
+        label: is CTA
+        widget: boolean
+        required: false
+        default: false
+      - hint: >-
+          ex:
+          https://codemod-registry.webflow.io/automations?labels=app-router-migration%2Creact
+        name: f_automations-filter-url
+        label: Automations Filter URL
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: migrations
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[migrations].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: migration_features
+    label: Migration Features
+    folder: cms/migration-features
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Feature Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_feature-title
+        label: Feature Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_feature-image
+        label: Feature Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_migration-labels
+        label: Migration Labels
+        widget: relation
+        required: false
+        collection: labels
+        value_field: cms/labels/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: migration-features
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[migration-features].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: migration_resources
+    label: Migration Resources
+    folder: cms/migration-resources
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Resource Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_resource-title
+        label: Resource Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_author-image
+        label: Author Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_resource-link
+        label: Resource Link
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: migration-resources
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[migration-resources].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: testimonials
+    label: Testimonials
+    folder: cms/testimonials
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Testimonial Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_person-name
+        label: Person Name
+        widget: string
+        required: false
+      - hint: ''
+        name: f_person-position
+        label: Person Position
+        widget: string
+        required: false
+      - hint: ''
+        name: f_person-image
+        label: Person Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_company-logo
+        label: Company Logo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: testimonials
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[testimonials].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: ctas
+    label: CTAs
+    folder: cms/ctas
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_title
+        label: Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_cta-description
+        label: CTA Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_button-cta
+        label: Button CTA
+        widget: string
+        required: false
+      - hint: ''
+        name: f_cta-link
+        label: CTA Link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_cta-icon
+        label: CTA Icon
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_labels
+        label: Labels
+        widget: relation
+        required: false
+        collection: labels
+        value_field: cms/labels/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_background-color-1
+        label: 'Background Color #1'
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_background-color-2
+        label: 'Background Color #2'
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_background-color-3
+        label: 'Background Color #3'
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_featured-in-registry-sidebar
+        label: Featured in registry sidebar
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_order
+        label: Order
+        widget: number
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: ctas
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[ctas].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: authors
+    label: Authors
+    folder: cms/authors
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_author-image
+        label: Author Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_github-profile
+        label: GitHub Profile
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: authors
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[authors].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: labels
+    label: Labels
+    folder: cms/labels
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: same as slug
+        name: f_identifier
+        label: Identifier
+        widget: string
+        required: false
+      - hint: ''
+        name: f_label-type
+        label: Label Type
+        widget: select
+        required: false
+        options:
+          - label: Image Label
+            value: Image Label
+          - label: Text Label
+            value: Text Label
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_migration-label
+        label: Migration Label
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_migration-2
+        label: Migration
+        widget: relation
+        required: false
+        collection: migrations
+        value_field: cms/migrations/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: labels
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[labels].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: codemod_engines
+    label: Codemod Engines
+    folder: cms/codemod-engines
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: codemod-engines
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[codemod-engines].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: framework
+    label: Frameworks
+    folder: cms/framework
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: framework
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[framework].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Migrations, key: 50622285'
+            label: Text
+            name: '50622285'
+            widget: string
+          - hint: 'Original text: Platform, key: 7397cc93'
+            label: Text
+            name: 7397cc93
+            widget: string
+          - hint: 'Original text: Codemod Studio, key: 596486a1'
+            label: Text
+            name: 596486a1
+            widget: string
+          - hint: 'Original text: Automation Registry, key: 66d4f126'
+            label: Text
+            name: 66d4f126
+            widget: string
+          - hint: "Original text: VS\_Code Extension, key: -77e9fdf1"
+            label: Text
+            name: '-77e9fdf1'
+            widget: string
+          - hint: 'Original text: CLI, key: 10500'
+            label: Text
+            name: '10500'
+            widget: string
+          - hint: 'Original text: Pricing, key: 507137a6'
+            label: Text
+            name: 507137a6
+            widget: string
+          - hint: 'Original text: Docs, key: 20965b'
+            label: Text
+            name: 20965b
+            widget: string
+          - hint: 'Original text: More, key: 24af75'
+            label: Text
+            name: 24af75
+            widget: string
+          - hint: 'Original text: Careers, key: -7bc27f6b'
+            label: Text
+            name: '-7bc27f6b'
+            widget: string
+          - hint: 'Original text: Blog, key: 1fa3c2'
+            label: Text
+            name: 1fa3c2
+            widget: string
+          - hint: 'Original text: GitHub, key: 7f258fe3'
+            label: Text
+            name: 7f258fe3
+            widget: string
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: >-
+              Original text: Save days of manual work by running automation
+              recipes to automate framework upgrades, right from your IDE or
+              CLI., key: 211f0714
+            label: Text
+            name: 211f0714
+            widget: text
+          - hint: 'Original text: Get Started →, key: 28cb9929'
+            label: Text
+            name: 28cb9929
+            widget: string
+          - hint: 'Original text: + more migrations, key: -5a0f8de5'
+            label: Text
+            name: '-5a0f8de5'
+            widget: string
+          - hint: 'Original text: Explore all migrations →, key: -4815d33d'
+            label: Text
+            name: '-4815d33d'
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: >-
+              Original text: The end-to-end platform for code automation at
+              scale., key: -5ccbe453
+            label: Text
+            name: '-5ccbe453'
+            widget: string
+          - hint: 'Original text: Build Automations with AI, key: 3b2036ec'
+            label: Text
+            name: 3b2036ec
+            widget: string
+          - hint: >-
+              Original text: Code transformation bots, also known as Codemods,
+              have superpowers, but they are very difficult to build. Use
+              Deepcode's AI-powered Codemod Studio to create code automations
+              "instantly," with additional help from specialized helpers and
+              debuggers., key: -2a8e763d
+            label: Text
+            name: '-2a8e763d'
+            widget: text
+          - hint: 'Original text: Learn More, key: -52bd880f'
+            label: Text
+            name: '-52bd880f'
+            widget: string
+          - hint: 'Original text: 01, key: 601'
+            label: Text
+            name: '601'
+            widget: string
+          - hint: 'Original text: 02, key: 602'
+            label: Text
+            name: '602'
+            widget: string
+          - hint: >-
+              Original text: Discover & Share Community Automations, key:
+              f8ac7d3
+            label: Text
+            name: f8ac7d3
+            widget: string
+          - hint: >-
+              Original text: Connect with a vibrant community of code automation
+              experts and share your codemods with developers by adding them to
+              Deepcode's Codemod Registry- the fastest-growing, single-stop hub
+              for all things related to code automation, including framework
+              upgrade recipes., key: -35654fc6
+            label: Text
+            name: '-35654fc6'
+            widget: text
+          - hint: 'Original text: Check out the Codemod Registry, key: 422293e1'
+            label: Text
+            name: '422293e1'
+            widget: string
+          - hint: >-
+              Original text: Migrate Projects with a DevX You Deserve, key:
+              -6dbabfc8
+            label: Text
+            name: '-6dbabfc8'
+            widget: string
+          - hint: >-
+              Original text: Discover the code automations you need and dry-run
+              them with just one click using your favorite extension or by
+              running one CLI command. Review and tweak changes as needed,
+              report issues with one click, and apply the changes only when you
+              are confident about them. With Deepcode, you don't even need to
+              know which engine powers your code automations. All the difficult
+              and tedious parts are handled for you behind the scenes. We aim to
+              provide an unparalleled level of excellence in DevX. Learn more
+              about our vision for "the dream migration” , key: 6dd53a96
+            label: Text
+            name: 6dd53a96
+            widget: text
+          - hint: 'Original text: here, key: 30cff0'
+            label: Text
+            name: 30cff0
+            widget: string
+          - hint: 'Original text: ., key: 2e'
+            label: Text
+            name: 2e
+            widget: string
+          - hint: 'Original text: Learn more, key: -52aefc2f'
+            label: Text
+            name: '-52aefc2f'
+            widget: string
+          - hint: 'Original text: 03, key: 603'
+            label: Text
+            name: '603'
+            widget: string
+          - hint: 'Original text: 04, key: 604'
+            label: Text
+            name: '604'
+            widget: string
+          - hint: 'Original text: Coming Soon, key: ccc773a'
+            label: Text
+            name: ccc773a
+            widget: string
+          - hint: 'Original text: Deploy at Scale, key: -4e84be0a'
+            label: Text
+            name: '-4e84be0a'
+            widget: string
+          - hint: >-
+              Original text: Based on our experience in Big Tech, we know that
+              in large teams, large-scale changes are not just about code, but
+              also about orchestrating changes across many teams until they are
+              implemented in production. Deepcode is building enterprise features
+              such as automatic task creation, PR management, CI/CD integration,
+              and leader dashboard to help progressive software teams go to
+              market faster and save their engineers' valuable time from working
+              on undifferentiated tasks. , key: -1f750cf8
+            label: Text
+            name: '-1f750cf8'
+            widget: text
+          - hint: 'Original text: Contact us, key: 7f274abe'
+            label: Text
+            name: 7f274abe
+            widget: string
+          - hint: 'Original text:  for more info., key: 58f0588c'
+            label: Text
+            name: 58f0588c
+            widget: string
+          - hint: 'Original text: Build automations with AI, key: -f9390f4'
+            label: Text
+            name: '-f9390f4'
+            widget: string
+          - hint: 'Original text: Simply run , key: 2d8028ef'
+            label: Text
+            name: 2d8028ef
+            widget: string
+          - hint: 'Original text: deepcode learn, key: 69571e94'
+            label: Text
+            name: '69571e94'
+            widget: string
+          - hint: >-
+              Original text:  and let AI instantly build your custom code
+              automation recipe. Automate the boring and get back to shipping
+              more new features to end-users., key: 2816e780
+            label: Text
+            name: '2816e780'
+            widget: text
+          - hint: 'Original text: Get started with Codemod Studio →, key: 182bd224'
+            label: Text
+            name: 182bd224
+            widget: string
+          - hint: 'Original text: Land large-scale changes, key: -11e01aba'
+            label: Text
+            name: '-11e01aba'
+            widget: string
+          - hint: >-
+              Original text: Save days of manual work by running open-source
+              automation recipes to automate framework upgrades, such as
+              Next.js, right from your IDE or CLI., key: 622608db
+            label: Text
+            name: 622608db
+            widget: text
+          - hint: 'Original text: Get started with CLI →, key: -7f13173f'
+            label: Text
+            name: '-7f13173f'
+            widget: string
+          - hint: "Original text: Get started with IDE\_Extension →, key: -1a158bb6"
+            label: Text
+            name: '-1a158bb6'
+            widget: string
+          - hint: 'Original text: See how Deepcode helps developers., key: 2f0c8eca'
+            label: Text
+            name: 2f0c8eca
+            widget: string
+          - hint: >-
+              Original text: Praise and reaction from our design partners...,
+              key: -6301a9bf
+            label: Text
+            name: '-6301a9bf'
+            widget: string
+          - hint: >-
+              Original text: "The automated changes (by Deepcode) feel like black
+              magic here. They do 90% of the work!", key: 5c74386e
+            label: Text
+            name: 5c74386e
+            widget: string
+          - hint: 'Original text: Omar López, key: -56203b13'
+            label: Text
+            name: '-56203b13'
+            widget: string
+          - hint: 'Original text: Lead Software Engineer at Cal.com, key: 1082acd0'
+            label: Text
+            name: 1082acd0
+            widget: string
+          - hint: >-
+              Original text: “Migrating over small things will take hours to
+              track down & fix up, with Deepcode codemod + web Ul can make that
+              be minutes.”, key: 7a99b039
+            label: Text
+            name: 7a99b039
+            widget: text
+          - hint: 'Original text: Max Leiter, key: 7dca968d'
+            label: Text
+            name: 7dca968d
+            widget: string
+          - hint: 'Original text: Software Engineer at Vercel, key: 25cf811c'
+            label: Text
+            name: 25cf811c
+            widget: string
+          - hint: >-
+              Original text: “This is awesome, it's lowering the bar for
+              codemods massively.”, key: -14149852
+            label: Text
+            name: '-14149852'
+            widget: string
+          - hint: 'Original text: Kaelig Deloumeau-Prigent, key: -28023baa'
+            label: Text
+            name: '-28023baa'
+            widget: string
+          - hint: 'Original text: Principal Engineer at Netlify, key: -16db01c1'
+            label: Text
+            name: '-16db01c1'
+            widget: string
+          - hint: 'Original text: You build., key: -43d993f'
+            label: Text
+            name: '-43d993f'
+            widget: string
+          - hint: 'Original text: We migrate., key: 26c620d5'
+            label: Text
+            name: 26c620d5
+            widget: string
+          - hint: >-
+              Original text: Engineers' time matters. Focus on your product
+              while we help you adopt the cutting-edge stack., key: -63d040c3
+            label: Text
+            name: '-63d040c3'
+            widget: text
+          - hint: 'Original text: Migrate Now, key: -447a915f'
+            label: Text
+            name: '-447a915f'
+            widget: string
+          - hint: 'Original text: →, key: 2192'
+            label: Text
+            name: '2192'
+            widget: string
+          - hint: 'Original text: Join our community., key: 37e7284f'
+            label: Text
+            name: 37e7284f
+            widget: string
+          - hint: >-
+              Original text: Join our Slack community of awesome developers
+              working hand-in-hand on making upgrades easier., key: 15e70d50
+            label: Text
+            name: 15e70d50
+            widget: text
+          - hint: 'Original text: Join our community, key: -698d3041'
+            label: Text
+            name: '-698d3041'
+            widget: string
+          - hint: 'Original text: Who are we?, key: -f3b071d'
+            label: Text
+            name: '-f3b071d'
+            widget: string
+          - hint: >-
+              Original text: We are a team of highly-skilled & ambitious
+              engineers, scientists, & builders with a proven track record of
+              shipping delightful & scalable products within some of the most
+              progressive tech companies in the world., key: -6c4a4b3c
+            label: Text
+            name: '-6c4a4b3c'
+            widget: text
+          - hint: 'Original text: Join our team!, key: -107afbc6'
+            label: Text
+            name: '-107afbc6'
+            widget: string
+          - hint: 'Original text: Email, key: 3ff5b7c'
+            label: Text
+            name: 3ff5b7c
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: Stay up to date with Deepcode., key: -67c2cf33'
+            label: Text
+            name: '-67c2cf33'
+            widget: string
+          - hint: >-
+              Original text: Be the first to receive the latest news and updates
+              about Deepcode!, key: -69570254
+            label: Text
+            name: '-69570254'
+            widget: string
+          - hint: 'Original text: Palo Alto, CA, USA, key: 4c9a30cb'
+            label: Text
+            name: 4c9a30cb
+            widget: string
+          - hint: 'Original text: hello@deepcode.io, key: 6f631392'
+            label: Text
+            name: 6f631392
+            widget: string
+          - hint: 'Original text: Company, key: -64202ba3'
+            label: Text
+            name: '-64202ba3'
+            widget: string
+          - hint: 'Original text: Privacy Policy, key: -3fbde6f6'
+            label: Text
+            name: '-3fbde6f6'
+            widget: string
+          - hint: "Original text: Terms &\_Conditions, key: -3e157255"
+            label: Text
+            name: '-3e157255'
+            widget: string
+          - hint: 'Original text: Telemetry Compliance, key: -764b68de'
+            label: Text
+            name: '-764b68de'
+            widget: string
+          - hint: 'Original text: Quick Link, key: -289a8973'
+            label: Text
+            name: '-289a8973'
+            widget: string
+          - hint: "Original text: Automation\_Registry, key: -76f38e5a"
+            label: Text
+            name: '-76f38e5a'
+            widget: string
+          - hint: 'Original text: © 2023 Deepcode. All rights reserved, key: -78dddcc6'
+            label: Text
+            name: '-78dddcc6'
+            widget: string
+          - hint: 'Original text: Popular and , key: 3cc9f230'
+            label: Text
+            name: 3cc9f230
+            widget: string
+          - hint: 'Original text: New →, key: 47af6f2'
+            label: Text
+            name: 47af6f2
+            widget: string
+          - hint: 'Original text: Getting Started, key: 3766ef65'
+            label: Text
+            name: 3766ef65
+            widget: string
+          - hint: >-
+              Original text: Learn more about the codemod registry., key:
+              -11bdd6eb
+            label: Text
+            name: '-11bdd6eb'
+            widget: string
+          - hint: 'Original text: View Docs, key: 16224ad6'
+            label: Text
+            name: 16224ad6
+            widget: string
+          - hint: 'Original text: Go to migrations homepage, key: 5d63103c'
+            label: Text
+            name: 5d63103c
+            widget: string
+          - hint: 'Original text: All Automations, key: -70d55603'
+            label: Text
+            name: '-70d55603'
+            widget: string
+          - hint: 'Original text: Framework, key: -67ffee22'
+            label: Text
+            name: '-67ffee22'
+            widget: string
+          - hint: 'Original text: Labels, key: -78cab3e1'
+            label: Text
+            name: '-78cab3e1'
+            widget: string
+          - hint: 'Original text: Migration, key: 44a853ae'
+            label: Text
+            name: 44a853ae
+            widget: string
+          - hint: 'Original text: Engine, key: 7bfce662'
+            label: Text
+            name: 7bfce662
+            widget: string
+          - hint: 'Original text: Author, key: 75920dab'
+            label: Text
+            name: 75920dab
+            widget: string
+          - hint: 'Original text: Verified Only, key: -1cec6dfc'
+            label: Text
+            name: '-1cec6dfc'
+            widget: string
+          - hint: 'Original text: Updated Date (Desc), key: 65b890fd'
+            label: Text
+            name: 65b890fd
+            widget: string
+          - hint: 'Original text: Updated Date (Asc), key: 346d9f3'
+            label: Text
+            name: 346d9f3
+            widget: string
+          - hint: 'Original text: Name (A-Z), key: -110efd72'
+            label: Text
+            name: '-110efd72'
+            widget: string
+          - hint: 'Original text: Name (Z-A), key: -1103a332'
+            label: Text
+            name: '-1103a332'
+            widget: string
+          - hint: 'Original text: Clear All, key: 2b99750e'
+            label: Text
+            name: 2b99750e
+            widget: string
+          - hint: 'Original text: Deepcode verified codemod, key: -50c3f593'
+            label: Text
+            name: '-50c3f593'
+            widget: string
+          - hint: >-
+              Original text: Deepcode verified codemods are high-quality codemods
+              that are regularly tested and maintained by our engineers and
+              codemod expert community., key: -3c8d7774
+            label: Text
+            name: '-3c8d7774'
+            widget: text
+          - hint: 'Original text: View Codemod →, key: -4e24ed94'
+            label: Text
+            name: '-4e24ed94'
+            widget: string
+          - hint: 'Original text: by, key: c57'
+            label: Text
+            name: c57
+            widget: string
+          - hint: 'Original text: Build Your Own Custom Codemod, key: -20710aa5'
+            label: Text
+            name: '-20710aa5'
+            widget: string
+          - hint: >-
+              Original text: Use AI-powered codemod studio and automate
+              undifferentiated tasks for yourself, colleagues or the community.,
+              key: -5df3c716
+            label: Text
+            name: '-5df3c716'
+            widget: text
+          - hint: 'Original text: Get Started, key: -364d0a89'
+            label: Text
+            name: '-364d0a89'
+            widget: string
+          - hint: 'Original text: Deepcode migrations homepage, key: 1d30b779'
+            label: Text
+            name: 1d30b779
+            widget: string
+          - hint: 'Original text: Automations, key: -2097c9e4'
+            label: Text
+            name: '-2097c9e4'
+            widget: string
+          - hint: >-
+              Original text: View or contribute to this automation on GitHub.,
+              key: -4f8972db
+            label: Text
+            name: '-4f8972db'
+            widget: string
+          - hint: 'Original text: This automation is built with, key: 4ca569b7'
+            label: Text
+            name: 4ca569b7
+            widget: string
+          - hint: 'Original text: Made by, key: -6b8a7cde'
+            label: Text
+            name: '-6b8a7cde'
+            widget: string
+          - hint: 'Original text: Estimated time saving, key: 372d39a9'
+            label: Text
+            name: 372d39a9
+            widget: string
+          - hint: 'Original text: Change mode, key: -2ae740d'
+            label: Text
+            name: '-2ae740d'
+            widget: string
+          - hint: 'Original text: Autonomous, key: -72330470'
+            label: Text
+            name: '-72330470'
+            widget: string
+          - hint: >-
+              Original text: Changes can safely be pushed and merged without
+              further human involvement., key: -1070f1fe
+            label: Text
+            name: '-1070f1fe'
+            widget: string
+          - hint: 'Original text: Assistive, key: -33544e51'
+            label: Text
+            name: '-33544e51'
+            widget: string
+          - hint: >-
+              Original text: This automation partially completes changes. Human
+              involvement is needed to make changes ready to be pushed and
+              merged., key: 311881f4
+            label: Text
+            name: 311881f4
+            widget: text
+          - hint: 'Original text: Applicability criteria, key: -344c5b86'
+            label: Text
+            name: '-344c5b86'
+            widget: string
+          - hint: 'Original text: Usage →, key: 5a3656b3'
+            label: Text
+            name: 5a3656b3
+            widget: string
+          - hint: "Original text: Run codemod using Deepcode CLI or VS\_Code extension:, key: 6efbdadc"
+            label: Text
+            name: 6efbdadc
+            widget: string
+          - hint: 'Original text: Deepcode CLI:, key: -246e2af6'
+            label: Text
+            name: '-246e2af6'
+            widget: string
+          - hint: >-
+              Original text: To run this automation in Deepcode CLI, make sure
+              you , key: 76134184
+            label: Text
+            name: '76134184'
+            widget: string
+          - hint: 'Original text: have the CLI installed first, key: 135aaa83'
+            label: Text
+            name: 135aaa83
+            widget: string
+          - hint: 'Original text: Copied to clipboard!, key: -516e742c'
+            label: Text
+            name: '-516e742c'
+            widget: string
+          - hint: "Original text: Deepcode VS\_Code extension:, key: -3346ce45"
+            label: Text
+            name: '-3346ce45'
+            widget: string
+          - hint: "Original text: To run this automation in Deepcode VS\_Code extension, make sure you , key: 6c816a33"
+            label: Text
+            name: 6c816a33
+            widget: string
+          - hint: 'Original text: have the extension installed first, key: 58baed02'
+            label: Text
+            name: 58baed02
+            widget: string
+          - hint: "Original text: Run in VS\_Code, key: -7a926116"
+            label: Text
+            name: '-7a926116'
+            widget: string
+          - hint: 'Original text: Use/edit codemod in Codemod Studio:, key: -5b64809'
+            label: Text
+            name: '-5b64809'
+            widget: string
+          - hint: "Original text: Open in\_Codemod Studio, key: -20a3d4ba"
+            label: Text
+            name: '-20a3d4ba'
+            widget: string
+          - hint: 'Original text: View Source, key: 305bd5f6'
+            label: Text
+            name: 305bd5f6
+            widget: string
+          - hint: 'Original text: Request Improvement →, key: 263cb4b7'
+            label: Text
+            name: 263cb4b7
+            widget: string
+          - hint: 'Original text: More about this codemod →, key: 5037fbe3'
+            label: Text
+            name: 5037fbe3
+            widget: string
+          - hint: 'Original text: Codemod Changelog, key: -7a916317'
+            label: Text
+            name: '-7a916317'
+            widget: string
+          - hint: 'Original text: app-router-recipe, key: 645a31e6'
+            label: Text
+            name: 645a31e6
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+              commodo diam libero vitae erat. Aenean faucibus nibh et justo
+              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+              tristique posuere., key: -5286fc08
+            label: Text
+            name: '-5286fc08'
+            widget: text
+          - hint: 'Original text: Next.js, key: -2eb001fc'
+            label: Text
+            name: '-2eb001fc'
+            widget: string
+          - hint: 'Original text: jscodeshift, key: 21973f8c'
+            label: Text
+            name: 21973f8c
+            widget: string
+          - hint: 'Original text: Deepcode, key: -280a97b0'
+            label: Text
+            name: '-280a97b0'
+            widget: string
+          - hint: 'Original text: Vercel, key: -677aa219'
+            label: Text
+            name: '-677aa219'
+            widget: string
+          - hint: 'Original text: Migrate Your Project with Deepcode →, key: 98447'
+            label: Text
+            name: '98447'
+            widget: string
+          - hint: >-
+              Original text: Next.js App Router Migration Features, key:
+              7e7ae42b
+            label: Text
+            name: 7e7ae42b
+            widget: string
+          - hint: 'Original text: , , key: 574'
+            label: Text
+            name: '574'
+            widget: string
+          - hint: 'Original text: Supercharged , key: -4639b9b5'
+            label: Text
+            name: '-4639b9b5'
+            widget: string
+          - hint: 'Original text: by Deepcode Automations., key: -654d7875'
+            label: Text
+            name: '-654d7875'
+            widget: string
+          - hint: 'Original text: View Automation →, key: -1272519c'
+            label: Text
+            name: '-1272519c'
+            widget: string
+          - hint: 'Original text: + more, key: 4b568e2a'
+            label: Text
+            name: 4b568e2a
+            widget: string
+          - hint: 'Original text: automations, key: 7bfe8e3c'
+            label: Text
+            name: 7bfe8e3c
+            widget: string
+          - hint: 'Original text: Explore all automations →, key: -6084ebfe'
+            label: Text
+            name: '-6084ebfe'
+            widget: string
+          - hint: 'Original text: + more , key: 1f7b3736'
+            label: Text
+            name: 1f7b3736
+            widget: string
+          - hint: 'Original text: Deepcode-verified, key: 11ba93a5'
+            label: Text
+            name: 11ba93a5
+            widget: string
+          - hint: 'Original text:  & , key: 7cda'
+            label: Text
+            name: 7cda
+            widget: string
+          - hint: 'Original text: community-made, key: 2f668079'
+            label: Text
+            name: 2f668079
+            widget: string
+          - hint: 'Original text:  automations., key: -2bcbf66e'
+            label: Text
+            name: '-2bcbf66e'
+            widget: string
+          - hint: 'Original text: Explore all available, key: -366aabe3'
+            label: Text
+            name: '-366aabe3'
+            widget: string
+          - hint: 'Original text: Automations., key: d9e8d92'
+            label: Text
+            name: d9e8d92
+            widget: string
+          - hint: "Original text: Explore All\_Automations →, key: -573cacbe"
+            label: Text
+            name: '-573cacbe'
+            widget: string
+          - hint: 'Original text: Copy for Webflow, key: 703e0200'
+            label: Text
+            name: '703e0200'
+            widget: string
+          - hint: "Original text: Get Started with the App\_Router Migration., key: -4412f708"
+            label: Text
+            name: '-4412f708'
+            widget: string
+          - hint: "Original text: You can get started with our ready-to-use automations using Deepcode CLI or IDE\_extension., key: 68cc1da5"
+            label: Text
+            name: 68cc1da5
+            widget: string
+          - hint: "Original text: Migrate using Deepcode VS\_Code extension., key: -6e39d540"
+            label: Text
+            name: '-6e39d540'
+            widget: string
+          - hint: 'Original text: Run, key: 1426b'
+            label: Text
+            name: 1426b
+            widget: string
+          - hint: >-
+              Original text: automations straight into your IDE using the
+              Deepcode VS Code extension., key: 184018bf
+            label: Text
+            name: 184018bf
+            widget: string
+          - hint: 'Original text: Getting Started with VSC Extension →, key: 35192858'
+            label: Text
+            name: '35192858'
+            widget: string
+          - hint: 'Original text: Migrate using Deepcode CLI., key: -44b57031'
+            label: Text
+            name: '-44b57031'
+            widget: string
+          - hint: >-
+              Original text: If you prefer using CLI, you can use Deepcode's
+              migration CLI to explore and run available, key: 6d5efee5
+            label: Text
+            name: 6d5efee5
+            widget: string
+          - hint: 'Original text: codemods., key: -426a0530'
+            label: Text
+            name: '-426a0530'
+            widget: string
+          - hint: 'Original text: Getting Started with CLI →, key: -be135cd'
+            label: Text
+            name: '-be135cd'
+            widget: string
+          - hint: 'Original text: Star us on GitHub., key: 162fe0fe'
+            label: Text
+            name: 162fe0fe
+            widget: string
+          - hint: >-
+              Original text: Some of our most exciting progress happens on
+              GitHub! Star the repository on GitHub to stay updated with our
+              latest automations and community updates., key: -6efb41a3
+            label: Text
+            name: '-6efb41a3'
+            widget: text
+          - hint: 'Original text: Star us on GitHub, key: -39173ad0'
+            label: Text
+            name: '-39173ad0'
+            widget: string
+          - hint: 'Original text: Migration Guides and Resources., key: -1e126417'
+            label: Text
+            name: '-1e126417'
+            widget: string
+          - hint: >-
+              Original text: Check our Next.js App Router migration guides,
+              resources, and examples., key: 6eeb2690
+            label: Text
+            name: 6eeb2690
+            widget: string
+          - hint: 'Original text: Read more →, key: 3137c131'
+            label: Text
+            name: 3137c131
+            widget: string
+          - hint: 'Original text: Migrating an Enterprise Project?, key: 35fc894a'
+            label: Text
+            name: 35fc894a
+            widget: string
+          - hint: >-
+              Original text: Enterprise project migrations can be overwhelming.
+              , key: 184d8d6b
+            label: Text
+            name: 184d8d6b
+            widget: string
+          - hint: 'Original text: Don''t put your team on hold, key: -3b72caf7'
+            label: Text
+            name: '-3b72caf7'
+            widget: string
+          - hint: 'Original text:  with shipping new features., key: 26ca5699'
+            label: Text
+            name: 26ca5699
+            widget: string
+          - hint: 'Original text: Become our next success story., key: 5dd1ef56'
+            label: Text
+            name: 5dd1ef56
+            widget: string
+          - hint: 'Original text: Name, key: 24eeab'
+            label: Text
+            name: 24eeab
+            widget: string
+          - hint: 'Original text: Migration Required, key: -3916a00f'
+            label: Text
+            name: '-3916a00f'
+            widget: string
+          - hint: 'Original text: Leave us a message, key: 51b6cf2f'
+            label: Text
+            name: 51b6cf2f
+            widget: string
+          - hint: >-
+              Original text: Thanks for reaching out. We will get back to you
+              soon., key: 616f2143
+            label: Text
+            name: 616f2143
+            widget: string
+          - hint: 'Original text: Or reach us at:, key: -30376fd1'
+            label: Text
+            name: '-30376fd1'
+            widget: string
+          - hint: 'Original text: Email:, key: 7bec143e'
+            label: Text
+            name: 7bec143e
+            widget: string
+          - hint: 'Original text: migrate@deepcode.io, key: 585f0519'
+            label: Text
+            name: 585f0519
+            widget: string
+          - hint: 'Original text: Chat:, key: 3e0e7c2'
+            label: Text
+            name: 3e0e7c2
+            widget: string
+          - hint: 'Original text: Chat with us, key: -73d87c70'
+            label: Text
+            name: '-73d87c70'
+            widget: string
+          - hint: 'Original text: Live call:, key: 52bb1188'
+            label: Text
+            name: 52bb1188
+            widget: string
+          - hint: 'Original text: Hop on a zoom call for a demo, key: e4e4eb7'
+            label: Text
+            name: e4e4eb7
+            widget: string
+          - hint: "Original text: Learn\_More →, key: -265dfa5d"
+            label: Text
+            name: '-265dfa5d'
+            widget: string
+          - hint: 'Original text: See Automations →, key: 7b1ce761'
+            label: Text
+            name: 7b1ce761
+            widget: string
+          - hint: 'Original text: Pricing plans that suit you, key: 118b5c35'
+            label: Text
+            name: 118b5c35
+            widget: string
+          - hint: >-
+              Original text: Deepcode brings automated migrations and dependency
+              upgrades for developers, small teams, and enterprise teams., key:
+              -56e4cf16
+            label: Text
+            name: '-56e4cf16'
+            widget: text
+          - hint: 'Original text: Monthly, key: -5311d813'
+            label: Text
+            name: '-5311d813'
+            widget: string
+          - hint: 'Original text: Annual, key: 752cddff'
+            label: Text
+            name: 752cddff
+            widget: string
+          - hint: 'Original text: Developer, key: 72a307aa'
+            label: Text
+            name: 72a307aa
+            widget: string
+          - hint: 'Original text: For developers and individual use, key: -61aa9cb7'
+            label: Text
+            name: '-61aa9cb7'
+            widget: string
+          - hint: >-
+              Original text: Deepcode AI (free GPT4 with monthly limit), key:
+              7ecce778
+            label: Text
+            name: 7ecce778
+            widget: string
+          - hint: "Original text: Private &\_Public Codemods, key: 1cda46fe"
+            label: Text
+            name: 1cda46fe
+            widget: string
+          - hint: "Original text: CLI &\_IDE\_Extension, key: 13c96f6f"
+            label: Text
+            name: 13c96f6f
+            widget: string
+          - hint: 'Original text: Slack Community support, key: -41b6f638'
+            label: Text
+            name: '-41b6f638'
+            widget: string
+          - hint: >-
+              Original text: Includes access to all our open-source resources,
+              migration recipes, and tools., key: 374d271d
+            label: Text
+            name: 374d271d
+            widget: string
+          - hint: 'Original text: Free, key: 218a8c'
+            label: Text
+            name: 218a8c
+            widget: string
+          - hint: >-
+              Original text: No usage limits on open-source and community tools
+              & resources., key: -239e9cff
+            label: Text
+            name: '-239e9cff'
+            widget: string
+          - hint: 'Original text: Team, key: 27b67d'
+            label: Text
+            name: 27b67d
+            widget: string
+          - hint: 'Original text: For small teams, key: 22f39c66'
+            label: Text
+            name: 22f39c66
+            widget: string
+          - hint: 'Original text: All Free Features, plus:, key: -6a68a66'
+            label: Text
+            name: '-6a68a66'
+            widget: string
+          - hint: 'Original text: Up to 500 developers, key: 75ac14'
+            label: Text
+            name: 75ac14
+            widget: string
+          - hint: >-
+              Original text: Get access to premium pro codemods made for
+              complicated automated migrations., key: 23be3213
+            label: Text
+            name: 23be3213
+            widget: string
+          - hint: 'Original text: Deepcode AI, key: 575675f8'
+            label: Text
+            name: 575675f8
+            widget: string
+          - hint: 'Original text: Pro Codemods by Deepcode, key: -13ec406a'
+            label: Text
+            name: '-13ec406a'
+            widget: string
+          - hint: 'Original text: Private Slack Support, key: -1e5b44fe'
+            label: Text
+            name: '-1e5b44fe'
+            widget: string
+          - hint: >-
+              Original text: Github, Jira, Linear, Slack Integrations, key:
+              -1db084df
+            label: Text
+            name: '-1db084df'
+            widget: string
+          - hint: >-
+              Original text: Suitable for teams looking for partial ownership of
+              migrations., key: -34d0b922
+            label: Text
+            name: '-34d0b922'
+            widget: string
+          - hint: 'Original text: $3,000+, key: -3615ed08'
+            label: Text
+            name: '-3615ed08'
+            widget: string
+          - hint: 'Original text: per month, key: -5ae32243'
+            label: Text
+            name: '-5ae32243'
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: 'Original text: Enterprise, key: 46f90f81'
+            label: Text
+            name: 46f90f81
+            widget: string
+          - hint: >-
+              Original text: For enterprise teams and large migrations, key:
+              -679bea5b
+            label: Text
+            name: '-679bea5b'
+            widget: string
+          - hint: 'Original text: All Team Features, plus:, key: -5a6c6075'
+            label: Text
+            name: '-5a6c6075'
+            widget: string
+          - hint: 'Original text: 500+ devs, key: 62e0d308'
+            label: Text
+            name: 62e0d308
+            widget: string
+          - hint: 'Original text: Fully managed migrations, key: -40672644'
+            label: Text
+            name: '-40672644'
+            widget: string
+          - hint: 'Original text: Leadership dashboard, key: -25583ce7'
+            label: Text
+            name: '-25583ce7'
+            widget: string
+          - hint: 'Original text: Custom integrations, key: 6740314e'
+            label: Text
+            name: 6740314e
+            widget: string
+          - hint: >-
+              Original text: Suitable for teams looking for full Deepcode-owned
+              migrations., key: -18de6af2
+            label: Text
+            name: '-18de6af2'
+            widget: string
+          - hint: 'Original text: Regular, key: -5c054884'
+            label: Text
+            name: '-5c054884'
+            widget: string
+          - hint: 'Original text: Starter Plan, key: 41d6045a'
+            label: Text
+            name: 41d6045a
+            widget: string
+          - hint: 'Original text: Limited Projects, key: -363c0780'
+            label: Text
+            name: '-363c0780'
+            widget: string
+          - hint: 'Original text: Regular Support Business, key: 1eef9155'
+            label: Text
+            name: 1eef9155
+            widget: string
+          - hint: 'Original text: 1 month Free Trial, key: 7c7e5211'
+            label: Text
+            name: 7c7e5211
+            widget: string
+          - hint: 'Original text: 3GB storage, key: 2f6878a9'
+            label: Text
+            name: 2f6878a9
+            widget: string
+          - hint: 'Original text: Ads Preview, key: 21e68818'
+            label: Text
+            name: '21e68818'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consetetur sadipscing
+              elitr., key: 64edb2b7
+            label: Text
+            name: 64edb2b7
+            widget: string
+          - hint: 'Original text: For Limited Period, key: -6ec03462'
+            label: Text
+            name: '-6ec03462'
+            widget: string
+          - hint: 'Original text: Platinum, key: 7399264c'
+            label: Text
+            name: 7399264c
+            widget: string
+          - hint: 'Original text: For the best results, key: -60c2b460'
+            label: Text
+            name: '-60c2b460'
+            widget: string
+          - hint: 'Original text: 20GB storage, key: -e93530c'
+            label: Text
+            name: '-e93530c'
+            widget: string
+          - hint: 'Original text: $999, key: 113a75'
+            label: Text
+            name: 113a75
+            widget: string
+          - hint: 'Original text: Standard, key: 521782dd'
+            label: Text
+            name: 521782dd
+            widget: string
+          - hint: 'Original text: Most Popular, key: 137b833c'
+            label: Text
+            name: 137b833c
+            widget: string
+          - hint: 'Original text: 10GB storage, key: -1644f86b'
+            label: Text
+            name: '-1644f86b'
+            widget: string
+          - hint: 'Original text: $600, key: 112e12'
+            label: Text
+            name: '112e12'
+            widget: string
+          - hint: 'Original text: Frequestly Asked , key: -9fa10e'
+            label: Text
+            name: '-9fa10e'
+            widget: string
+          - hint: 'Original text: Questions, key: d37612d'
+            label: Text
+            name: d37612d
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consetetur sadipscing
+              elitr, sed diam nonumy eirmod tempor invidunt., key: -68847df4
+            label: Text
+            name: '-68847df4'
+            widget: text
+          - hint: 'Original text: How do I migrate my project?, key: -59fe1cf7'
+            label: Text
+            name: '-59fe1cf7'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consetetur sadipscing
+              elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+              magna aliquyam erat, sed diam voluptua., key: 316c7bbc
+            label: Text
+            name: 316c7bbc
+            widget: text
+          - hint: >-
+              Original text: Do I need to get a plan to start using Deepcode
+              automations?, key: 418d9a2b
+            label: Text
+            name: 418d9a2b
+            widget: string
+          - hint: 'Original text: Which plan do I need?, key: -5e99298f'
+            label: Text
+            name: '-5e99298f'
+            widget: string
+          - hint: >-
+              Original text: Do you guarantee migrating enterprise projects?,
+              key: 7421f34c
+            label: Text
+            name: 7421f34c
+            widget: string
+          - hint: 'Original text: Last updated: January 14, 2023, key: 5cd6f1a3'
+            label: Text
+            name: 5cd6f1a3
+            widget: string
+          - hint: >-
+              Original text: This Privacy Policy describes Our policies and
+              procedures on the collection, use and disclosure of Your
+              information when You use the Service and tells You about Your
+              privacy rights and how the law protects You., key: -7bf5d066
+            label: Text
+            name: '-7bf5d066'
+            widget: text
+          - hint: >-
+              Original text: We use Your Personal data to provide and improve
+              the Service. By using the Service, You agree to the collection and
+              use of information in accordance with this Privacy Policy. This
+              Privacy Policy has been created with the help of the , key:
+              -33b078e
+            label: Text
+            name: '-33b078e'
+            widget: text
+          - hint: 'Original text: Free Privacy Policy Generator, key: 74917e31'
+            label: Text
+            name: '74917e31'
+            widget: string
+          - hint: 'Original text: Interpretation and Definitions, key: 4089129f'
+            label: Text
+            name: 4089129f
+            widget: string
+          - hint: 'Original text: Interpretation, key: -4d7b91d8'
+            label: Text
+            name: '-4d7b91d8'
+            widget: string
+          - hint: 'Original text: ​, key: 200b'
+            label: Text
+            name: 200b
+            widget: string
+          - hint: >-
+              Original text: The words of which the initial letter is
+              capitalized have meanings defined under the following conditions.
+              The following definitions shall have the same meaning regardless
+              of whether they appear in singular or in plural., key: -4a132997
+            label: Text
+            name: '-4a132997'
+            widget: text
+          - hint: 'Original text: Definitions, key: 11071d60'
+            label: Text
+            name: 11071d60
+            widget: string
+          - hint: >-
+              Original text: For the purposes of this Privacy Policy:, key:
+              -7290038e
+            label: Text
+            name: '-7290038e'
+            widget: string
+          - hint: 'Original text: Account, key: 1d0c220d'
+            label: Text
+            name: 1d0c220d
+            widget: string
+          - hint: >-
+              Original text:  means a unique account created for You to access
+              our Service or parts of our Service., key: -233c32b0
+            label: Text
+            name: '-233c32b0'
+            widget: string
+          - hint: >-
+              Original text:  (referred to as either "the Company", "We", "Us"
+              or "Our" in this Agreement) refers to Caartaa Inc., 480 E Okeefe
+              St, Unit 216 East Palo Alto, CA US., key: -f6bbc50
+            label: Text
+            name: '-f6bbc50'
+            widget: text
+          - hint: 'Original text: Cookies, key: -64062591'
+            label: Text
+            name: '-64062591'
+            widget: string
+          - hint: >-
+              Original text:  are small files that are placed on Your computer,
+              mobile device or any other device by a website, containing the
+              details of Your browsing history on that website among its many
+              uses., key: -765d0541
+            label: Text
+            name: '-765d0541'
+            widget: text
+          - hint: 'Original text: Country, key: -63b0108a'
+            label: Text
+            name: '-63b0108a'
+            widget: string
+          - hint: >-
+              Original text:  refers to: California, United States, key:
+              195511c5
+            label: Text
+            name: 195511c5
+            widget: string
+          - hint: 'Original text: Device, key: 79d00a76'
+            label: Text
+            name: 79d00a76
+            widget: string
+          - hint: >-
+              Original text:  means any device that can access the Service such
+              as a computer, a cellphone or a digital tablet., key: -17f99db5
+            label: Text
+            name: '-17f99db5'
+            widget: text
+          - hint: 'Original text: Personal Data, key: 4eb6458a'
+            label: Text
+            name: 4eb6458a
+            widget: string
+          - hint: >-
+              Original text:  is any information that relates to an identified
+              or identifiable individual., key: 4d18a9f2
+            label: Text
+            name: 4d18a9f2
+            widget: string
+          - hint: 'Original text: Service, key: -2683a16b'
+            label: Text
+            name: '-2683a16b'
+            widget: string
+          - hint: 'Original text:  refers to the Website., key: -3faeb6a6'
+            label: Text
+            name: '-3faeb6a6'
+            widget: string
+          - hint: 'Original text: Service Provider, key: -76277cc4'
+            label: Text
+            name: '-76277cc4'
+            widget: string
+          - hint: >-
+              Original text:  means any natural or legal person who processes
+              the data on behalf of the Company. It refers to third-party
+              companies or individuals employed by the Company to facilitate the
+              Service, to provide the Service on behalf of the Company, to
+              perform services related to the Service or to assist the Company
+              in analyzing how the Service is used., key: 63efad06
+            label: Text
+            name: 63efad06
+            widget: text
+          - hint: 'Original text: Usage Data, key: a510f09'
+            label: Text
+            name: a510f09
+            widget: string
+          - hint: >-
+              Original text:  refers to data collected automatically, either
+              generated by the use of the Service or from the Service
+              infrastructure itself (for example, the duration of a page
+              visit)., key: -3b36b13c
+            label: Text
+            name: '-3b36b13c'
+            widget: text
+          - hint: 'Original text: Website, key: -53cd8785'
+            label: Text
+            name: '-53cd8785'
+            widget: string
+          - hint: 'Original text:  refers to Deepcode, accessible from , key: 30ddbe18'
+            label: Text
+            name: 30ddbe18
+            widget: string
+          - hint: 'Original text: deepcode.io, key: -1f7b2c9c'
+            label: Text
+            name: '-1f7b2c9c'
+            widget: string
+          - hint: 'Original text: You, key: 15bff'
+            label: Text
+            name: 15bff
+            widget: string
+          - hint: >-
+              Original text:  means the individual accessing or using the
+              Service, or the company, or other legal entity on behalf of which
+              such individual is accessing or using the Service, as applicable.,
+              key: 499e040
+            label: Text
+            name: '499e040'
+            widget: text
+          - hint: >-
+              Original text: Collecting and Using Your Personal Data, key:
+              3b4d1c6a
+            label: Text
+            name: 3b4d1c6a
+            widget: string
+          - hint: 'Original text: Types of Data Collected, key: -6b2ca84b'
+            label: Text
+            name: '-6b2ca84b'
+            widget: string
+          - hint: >-
+              Original text: While using Our Service, We may ask You to provide
+              Us with certain personally identifiable information that can be
+              used to contact or identify You. Personally identifiable
+              information may include, but is not limited to:, key: -195a589f
+            label: Text
+            name: '-195a589f'
+            widget: text
+          - hint: >-
+              Original text: Usage Data is collected automatically when using
+              the Service., key: 13b11237
+            label: Text
+            name: 13b11237
+            widget: string
+          - hint: >-
+              Original text: Usage Data may include information such as Your
+              Device's Internet Protocol address (e.g. IP address), browser
+              type, browser version, the pages of our Service that You visit,
+              the time and date of Your visit, the time spent on those pages,
+              unique device identifiers and other diagnostic data., key:
+              3d975dae
+            label: Text
+            name: 3d975dae
+            widget: text
+          - hint: >-
+              Original text: When You access the Service by or through a mobile
+              device, We may collect certain information automatically,
+              including, but not limited to, the type of mobile device You use,
+              Your mobile device unique ID, the IP address of Your mobile
+              device, Your mobile operating system, the type of mobile Internet
+              browser You use, unique device identifiers and other diagnostic
+              data., key: 634c672f
+            label: Text
+            name: 634c672f
+            widget: text
+          - hint: >-
+              Original text: We may also collect information that Your browser
+              sends whenever You visit our Service or when You access the
+              Service by or through a mobile device., key: 50fa946e
+            label: Text
+            name: 50fa946e
+            widget: text
+          - hint: 'Original text: Tracking Technologies and Cookies, key: 7d8db9f9'
+            label: Text
+            name: 7d8db9f9
+            widget: string
+          - hint: >-
+              Original text: We use Cookies and similar tracking technologies to
+              track the activity on Our Service and store certain information.
+              Tracking technologies used are beacons, tags, and scripts to
+              collect and track information and to improve and analyze Our
+              Service. The technologies We use may include:, key: 444cc91a
+            label: Text
+            name: 444cc91a
+            widget: text
+          - hint: 'Original text: Cookies or Browser Cookies., key: -42e898dd'
+            label: Text
+            name: '-42e898dd'
+            widget: string
+          - hint: >-
+              Original text:  A cookie is a small file placed on Your Device.
+              You can instruct Your browser to refuse all Cookies or to indicate
+              when a Cookie is being sent. However, if You do not accept
+              Cookies, You may not be able to use some parts of our Service.
+              Unless you have adjusted Your browser setting so that it will
+              refuse Cookies, our Service may use Cookies., key: 7dea3c22
+            label: Text
+            name: 7dea3c22
+            widget: text
+          - hint: 'Original text: Web Beacons., key: -45aadb15'
+            label: Text
+            name: '-45aadb15'
+            widget: string
+          - hint: >-
+              Original text:  Certain sections of our Service and our emails may
+              contain small electronic files known as web beacons (also referred
+              to as clear gifs, pixel tags, and single-pixel gifs) that permit
+              the Company, for example, to count users who have visited those
+              pages or opened an email and for other related website statistics
+              (for example, recording the popularity of a certain section and
+              verifying system and server integrity)., key: -11770f09
+            label: Text
+            name: '-11770f09'
+            widget: text
+          - hint: >-
+              Original text: Cookies can be "Persistent" or "Session" Cookies.
+              Persistent Cookies remain on Your personal computer or mobile
+              device when You go offline, while Session Cookies are deleted as
+              soon as You close Your web browser. Learn more about cookies on
+              the , key: 7223456c
+            label: Text
+            name: 7223456c
+            widget: text
+          - hint: 'Original text: Free Privacy Policy website, key: 75b56b99'
+            label: Text
+            name: 75b56b99
+            widget: string
+          - hint: 'Original text:  article., key: 3f4eb218'
+            label: Text
+            name: 3f4eb218
+            widget: string
+          - hint: >-
+              Original text: We use both Session and Persistent Cookies for the
+              purposes set out below:, key: 54f9838b
+            label: Text
+            name: 54f9838b
+            widget: string
+          - hint: 'Original text: Necessary / Essential Cookies, key: -5e8438a5'
+            label: Text
+            name: '-5e8438a5'
+            widget: string
+          - hint: 'Original text: Type: Session Cookies, key: -3e06613b'
+            label: Text
+            name: '-3e06613b'
+            widget: string
+          - hint: 'Original text: Administered by: Us, key: -5b54940c'
+            label: Text
+            name: '-5b54940c'
+            widget: string
+          - hint: >-
+              Original text: Purpose: These Cookies are essential to provide You
+              with services available through the Website and to enable You to
+              use some of its features. They help to authenticate users and
+              prevent fraudulent use of user accounts. Without these Cookies,
+              the services that You have asked for cannot be provided, and We
+              only use these Cookies to provide You with those services., key:
+              19e8ca43
+            label: Text
+            name: 19e8ca43
+            widget: text
+          - hint: >-
+              Original text: Cookies Policy / Notice Acceptance Cookies, key:
+              3927b4c0
+            label: Text
+            name: 3927b4c0
+            widget: string
+          - hint: 'Original text: Type: Persistent Cookies, key: -67dc29fa'
+            label: Text
+            name: '-67dc29fa'
+            widget: string
+          - hint: >-
+              Original text: Purpose: These Cookies identify if users have
+              accepted the use of cookies on the Website., key: -6bfd7cf5
+            label: Text
+            name: '-6bfd7cf5'
+            widget: string
+          - hint: 'Original text: Functionality Cookies, key: -2a356906'
+            label: Text
+            name: '-2a356906'
+            widget: string
+          - hint: >-
+              Original text: Purpose: These Cookies allow us to remember choices
+              You make when You use the Website, such as remembering your login
+              details or language preference. The purpose of these Cookies is to
+              provide You with a more personal experience and to avoid You
+              having to re-enter your preferences every time You use the
+              Website., key: -4eb6fbbc
+            label: Text
+            name: '-4eb6fbbc'
+            widget: text
+          - hint: >-
+              Original text: For more information about the cookies we use and
+              your choices regarding cookies, please visit our Cookies Policy or
+              the Cookies section of our Privacy Policy., key: 6eb1541d
+            label: Text
+            name: 6eb1541d
+            widget: text
+          - hint: 'Original text: Use of Your Personal Data, key: -64b25093'
+            label: Text
+            name: '-64b25093'
+            widget: string
+          - hint: >-
+              Original text: The Company may use Personal Data for the following
+              purposes:, key: f553f4
+            label: Text
+            name: f553f4
+            widget: string
+          - hint: 'Original text: To provide and maintain our Service, key: 5c98e6d9'
+            label: Text
+            name: 5c98e6d9
+            widget: string
+          - hint: >-
+              Original text: , including to monitor the usage of our Service.,
+              key: -90ad614
+            label: Text
+            name: '-90ad614'
+            widget: string
+          - hint: 'Original text: To manage Your Account:, key: 68b2e9e4'
+            label: Text
+            name: 68b2e9e4
+            widget: string
+          - hint: >-
+              Original text:  to manage Your registration as a user of the
+              Service. The Personal Data You provide can give You access to
+              different functionalities of the Service that are available to You
+              as a registered user., key: -69297400
+            label: Text
+            name: '-69297400'
+            widget: text
+          - hint: 'Original text: For the performance of a contract:, key: -4a8b570a'
+            label: Text
+            name: '-4a8b570a'
+            widget: string
+          - hint: >-
+              Original text:  the development, compliance and undertaking of the
+              purchase contract for the products, items or services You have
+              purchased or of any other contract with Us through the Service.,
+              key: 340d0c0d
+            label: Text
+            name: 340d0c0d
+            widget: text
+          - hint: 'Original text: To contact You:, key: -7bce6280'
+            label: Text
+            name: '-7bce6280'
+            widget: string
+          - hint: >-
+              Original text:  To contact You by email, telephone calls, SMS, or
+              other equivalent forms of electronic communication, such as a
+              mobile application's push notifications regarding updates or
+              informative communications related to the functionalities,
+              products or contracted services, including the security updates,
+              when necessary or reasonable for their implementation., key:
+              -18b56d40
+            label: Text
+            name: '-18b56d40'
+            widget: text
+          - hint: 'Original text: To provide You, key: -749dc05'
+            label: Text
+            name: '-749dc05'
+            widget: string
+          - hint: >-
+              Original text:  with news, special offers and general information
+              about other goods, services and events which we offer that are
+              similar to those that you have already purchased or enquired about
+              unless You have opted not to receive such information., key:
+              64aea405
+            label: Text
+            name: 64aea405
+            widget: text
+          - hint: 'Original text: To manage Your requests:, key: -3384ee41'
+            label: Text
+            name: '-3384ee41'
+            widget: string
+          - hint: >-
+              Original text:  To attend and manage Your requests to Us., key:
+              1bc05cab
+            label: Text
+            name: 1bc05cab
+            widget: string
+          - hint: 'Original text: For business transfers:, key: 8fea9bb'
+            label: Text
+            name: 8fea9bb
+            widget: string
+          - hint: >-
+              Original text:  We may use Your information to evaluate or conduct
+              a merger, divestiture, restructuring, reorganization, dissolution,
+              or other sale or transfer of some or all of Our assets, whether as
+              a going concern or as part of bankruptcy, liquidation, or similar
+              proceeding, in which Personal Data held by Us about our Service
+              users is among the assets transferred., key: -2b7b563d
+            label: Text
+            name: '-2b7b563d'
+            widget: text
+          - hint: 'Original text: For other purposes, key: 2c2267c'
+            label: Text
+            name: 2c2267c
+            widget: string
+          - hint: >-
+              Original text: : We may use Your information for other purposes,
+              such as data analysis, identifying usage trends, determining the
+              effectiveness of our promotional campaigns and to evaluate and
+              improve our Service, products, services, marketing and your
+              experience., key: 39dabe65
+            label: Text
+            name: 39dabe65
+            widget: text
+          - hint: >-
+              Original text: We may share Your personal information in the
+              following situations:, key: 150c0ee1
+            label: Text
+            name: 150c0ee1
+            widget: string
+          - hint: 'Original text: With Service Providers:, key: 5dd3dfdd'
+            label: Text
+            name: 5dd3dfdd
+            widget: string
+          - hint: >-
+              Original text:  We may share Your personal information with
+              Service Providers to monitor and analyze the use of our Service,
+              to contact You., key: -ff622ba
+            label: Text
+            name: '-ff622ba'
+            widget: text
+          - hint: >-
+              Original text:  We may share or transfer Your personal information
+              in connection with, or during negotiations of, any merger, sale of
+              Company assets, financing, or acquisition of all or a portion of
+              Our business to another company., key: 70599369
+            label: Text
+            name: '70599369'
+            widget: text
+          - hint: 'Original text: With Affiliates:, key: -6cb13c26'
+            label: Text
+            name: '-6cb13c26'
+            widget: string
+          - hint: >-
+              Original text:  We may share Your information with Our affiliates,
+              in which case we will require those affiliates to honor this
+              Privacy Policy. Affiliates include Our parent company and any
+              other subsidiaries, joint venture partners or other companies that
+              We control or that are under common control with Us., key: b6a1077
+            label: Text
+            name: b6a1077
+            widget: text
+          - hint: 'Original text: With business partners:, key: -2e41c5f7'
+            label: Text
+            name: '-2e41c5f7'
+            widget: string
+          - hint: >-
+              Original text:  We may share Your information with Our business
+              partners to offer You certain products, services or promotions.,
+              key: -2dca3b0d
+            label: Text
+            name: '-2dca3b0d'
+            widget: text
+          - hint: 'Original text: With other users:, key: 702b5b3c'
+            label: Text
+            name: 702b5b3c
+            widget: string
+          - hint: >-
+              Original text:  when You share personal information or otherwise
+              interact in the public areas with other users, such information
+              may be viewed by all users and may be publicly distributed
+              outside., key: 32c2cc56
+            label: Text
+            name: 32c2cc56
+            widget: text
+          - hint: 'Original text: With Your consent, key: 5547ce47'
+            label: Text
+            name: 5547ce47
+            widget: string
+          - hint: >-
+              Original text: : We may disclose Your personal information for any
+              other purpose with Your consent., key: -3fc7c426
+            label: Text
+            name: '-3fc7c426'
+            widget: string
+          - hint: 'Original text: Retention of Your Personal Data, key: -3c89fa3c'
+            label: Text
+            name: '-3c89fa3c'
+            widget: string
+          - hint: >-
+              Original text: The Company will retain Your Personal Data only for
+              as long as is necessary for the purposes set out in this Privacy
+              Policy. We will retain and use Your Personal Data to the extent
+              necessary to comply with our legal obligations (for example, if we
+              are required to retain your data to comply with applicable laws),
+              resolve disputes, and enforce our legal agreements and policies.,
+              key: -1dcf6edf
+            label: Text
+            name: '-1dcf6edf'
+            widget: text
+          - hint: >-
+              Original text: The Company will also retain Usage Data for
+              internal analysis purposes. Usage Data is generally retained for a
+              shorter period of time, except when this data is used to
+              strengthen the security or to improve the functionality of Our
+              Service, or We are legally obligated to retain this data for
+              longer time periods., key: 2c3e199
+            label: Text
+            name: 2c3e199
+            widget: text
+          - hint: 'Original text: Transfer of Your Personal Data, key: -4e28d4ef'
+            label: Text
+            name: '-4e28d4ef'
+            widget: string
+          - hint: >-
+              Original text: Your information, including Personal Data, is
+              processed at the Company's operating offices and in any other
+              places where the parties involved in the processing are located.
+              It means that this information may be transferred to — and
+              maintained on — computers located outside of Your state, province,
+              country or other governmental jurisdiction where the data
+              protection laws may differ than those from Your jurisdiction.,
+              key: -c68427d
+            label: Text
+            name: '-c68427d'
+            widget: text
+          - hint: >-
+              Original text: Your consent to this Privacy Policy followed by
+              Your submission of such information represents Your agreement to
+              that transfer., key: 6732fcf7
+            label: Text
+            name: 6732fcf7
+            widget: text
+          - hint: >-
+              Original text: The Company will take all steps reasonably
+              necessary to ensure that Your data is treated securely and in
+              accordance with this Privacy Policy and no transfer of Your
+              Personal Data will take place to an organization or a country
+              unless there are adequate controls in place including the security
+              of Your data and other personal information., key: -5e236654
+            label: Text
+            name: '-5e236654'
+            widget: text
+          - hint: 'Original text: Delete Your Personal Data, key: -533bcb0e'
+            label: Text
+            name: '-533bcb0e'
+            widget: string
+          - hint: >-
+              Original text: You have the right to delete or request that We
+              assist in deleting the Personal Data that We have collected about
+              You., key: ed39cac
+            label: Text
+            name: ed39cac
+            widget: text
+          - hint: >-
+              Original text: Our Service may give You the ability to delete
+              certain information about You from within the Service., key:
+              -721805c8
+            label: Text
+            name: '-721805c8'
+            widget: text
+          - hint: >-
+              Original text: You may update, amend, or delete Your information
+              at any time by signing in to Your Account, if you have one, and
+              visiting the account settings section that allows you to manage
+              Your personal information. You may also contact Us to request
+              access to, correct, or delete any personal information that You
+              have provided to Us., key: -539b8846
+            label: Text
+            name: '-539b8846'
+            widget: text
+          - hint: >-
+              Original text: Please note, however, that We may need to retain
+              certain information when we have a legal obligation or lawful
+              basis to do so., key: 1e2f3cb0
+            label: Text
+            name: 1e2f3cb0
+            widget: text
+          - hint: 'Original text: Disclosure of Your Personal Data, key: 740d0793'
+            label: Text
+            name: 740d0793
+            widget: string
+          - hint: 'Original text: Business Transactions, key: -15d82a4b'
+            label: Text
+            name: '-15d82a4b'
+            widget: string
+          - hint: >-
+              Original text: If the Company is involved in a merger, acquisition
+              or asset sale, Your Personal Data may be transferred. We will
+              provide notice before Your Personal Data is transferred and
+              becomes subject to a different Privacy Policy., key: -9686441
+            label: Text
+            name: '-9686441'
+            widget: text
+          - hint: 'Original text: Law enforcement, key: 2831f6a2'
+            label: Text
+            name: 2831f6a2
+            widget: string
+          - hint: >-
+              Original text: Under certain circumstances, the Company may be
+              required to disclose Your Personal Data if required to do so by
+              law or in response to valid requests by public authorities (e.g. a
+              court or a government agency)., key: -79ca4cd6
+            label: Text
+            name: '-79ca4cd6'
+            widget: text
+          - hint: 'Original text: Other legal requirements, key: 24c6f1c7'
+            label: Text
+            name: 24c6f1c7
+            widget: string
+          - hint: >-
+              Original text: The Company may disclose Your Personal Data in the
+              good faith belief that such action is necessary to:, key:
+              -529283cc
+            label: Text
+            name: '-529283cc'
+            widget: text
+          - hint: 'Original text: Comply with a legal obligation, key: -29ed1266'
+            label: Text
+            name: '-29ed1266'
+            widget: string
+          - hint: >-
+              Original text: Protect and defend the rights or property of the
+              Company, key: 2bb2b45d
+            label: Text
+            name: 2bb2b45d
+            widget: string
+          - hint: >-
+              Original text: Prevent or investigate possible wrongdoing in
+              connection with the Service, key: -78462390
+            label: Text
+            name: '-78462390'
+            widget: string
+          - hint: >-
+              Original text: Protect the personal safety of Users of the Service
+              or the public, key: -74760ddb
+            label: Text
+            name: '-74760ddb'
+            widget: string
+          - hint: 'Original text: Protect against legal liability, key: 286a1596'
+            label: Text
+            name: 286a1596
+            widget: string
+          - hint: 'Original text: Security of Your Personal Data, key: 611f8ca6'
+            label: Text
+            name: 611f8ca6
+            widget: string
+          - hint: >-
+              Original text: The security of Your Personal Data is important to
+              Us, but remember that no method of transmission over the Internet,
+              or method of electronic storage is 100% secure. While We strive to
+              use commercially acceptable means to protect Your Personal Data,
+              We cannot guarantee its absolute security., key: -5007763d
+            label: Text
+            name: '-5007763d'
+            widget: text
+          - hint: 'Original text: Children''s Privacy, key: 377957d3'
+            label: Text
+            name: 377957d3
+            widget: string
+          - hint: >-
+              Original text: Our Service does not address anyone under the age
+              of 13. We do not knowingly collect personally identifiable
+              information from anyone under the age of 13. If You are a parent
+              or guardian and You are aware that Your child has provided Us with
+              Personal Data, please contact Us. If We become aware that We have
+              collected Personal Data from anyone under the age of 13 without
+              verification of parental consent, We take steps to remove that
+              information from Our servers., key: 6b906f14
+            label: Text
+            name: 6b906f14
+            widget: text
+          - hint: >-
+              Original text: If We need to rely on consent as a legal basis for
+              processing Your information and Your country requires consent from
+              a parent, We may require Your parent's consent before We collect
+              and use that information., key: -60fce560
+            label: Text
+            name: '-60fce560'
+            widget: text
+          - hint: 'Original text: Links to Other Websites, key: -350ee5fa'
+            label: Text
+            name: '-350ee5fa'
+            widget: string
+          - hint: >-
+              Original text: Our Service may contain links to other websites
+              that are not operated by Us. If You click on a third party link,
+              You will be directed to that third party's site. We strongly
+              advise You to review the Privacy Policy of every site You visit.,
+              key: 69df83b0
+            label: Text
+            name: 69df83b0
+            widget: text
+          - hint: >-
+              Original text: We have no control over and assume no
+              responsibility for the content, privacy policies or practices of
+              any third party sites or services., key: 69806c71
+            label: Text
+            name: 69806c71
+            widget: text
+          - hint: 'Original text: Changes to this Privacy Policy, key: 793f7c4'
+            label: Text
+            name: 793f7c4
+            widget: string
+          - hint: >-
+              Original text: We may update Our Privacy Policy from time to time.
+              We will notify You of any changes by posting the new Privacy
+              Policy on this page., key: -56d8ec8f
+            label: Text
+            name: '-56d8ec8f'
+            widget: text
+          - hint: >-
+              Original text: We will let You know via email and/or a prominent
+              notice on Our Service, prior to the change becoming effective and
+              update the "Last updated" date at the top of this Privacy Policy.,
+              key: -1824785a
+            label: Text
+            name: '-1824785a'
+            widget: text
+          - hint: >-
+              Original text: You are advised to review this Privacy Policy
+              periodically for any changes. Changes to this Privacy Policy are
+              effective when they are posted on this page., key: -19e4ed89
+            label: Text
+            name: '-19e4ed89'
+            widget: text
+          - hint: >-
+              Original text: If you have any questions about this Privacy
+              Policy, You can contact us:, key: 6c58319
+            label: Text
+            name: 6c58319
+            widget: string
+          - hint: 'Original text: By email: , key: -5634e6e7'
+            label: Text
+            name: '-5634e6e7'
+            widget: string
+          - hint: 'Original text: privacy@deepcode.io, key: 69cc5b1c'
+            label: Text
+            name: 69cc5b1c
+            widget: string
+          - hint: 'Original text: Code migrations at , key: 3cc9bc85'
+            label: Text
+            name: 3cc9bc85
+            widget: string
+          - hint: 'Original text: lightning speed, key: b33a771'
+            label: Text
+            name: b33a771
+            widget: string
+          - hint: 'Original text: Next.js App Router Migration, key: 4b7dc892'
+            label: Text
+            name: 4b7dc892
+            widget: string
+          - hint: >-
+              Original text: Migrate from Next.js V12 Pages Router to the latest
+              V14 App Router., key: -642121b
+            label: Text
+            name: '-642121b'
+            widget: string
+          - hint: >-
+              Original text: Next.js V12 Pages Router → V14 App Router, key:
+              -238430ed
+            label: Text
+            name: '-238430ed'
+            widget: string
+          - hint: 'Original text: V12, key: 148f7'
+            label: Text
+            name: 148f7
+            widget: string
+          - hint: 'Original text:  Pages Router, key: 44479b85'
+            label: Text
+            name: 44479b85
+            widget: string
+          - hint: 'Original text: V14, key: 148f9'
+            label: Text
+            name: 148f9
+            widget: string
+          - hint: 'Original text:  App Router, key: 22b82e88'
+            label: Text
+            name: 22b82e88
+            widget: string
+          - hint: 'Original text:  Pages Router → , key: -36f07cb7'
+            label: Text
+            name: '-36f07cb7'
+            widget: string
+          - hint: 'Original text:  App Router Migration, key: 1c2c1c16'
+            label: Text
+            name: 1c2c1c16
+            widget: string
+          - hint: >-
+              Original text: Automated migrations, one framework at a time.,
+              key: 10f0709a
+            label: Text
+            name: 10f0709a
+            widget: string
+          - hint: >-
+              Original text: Bring your Next.js project and run the following
+              automations with just one click directly in VS Code (for CLI,
+              click , key: 36c460dc
+            label: Text
+            name: 36c460dc
+            widget: text
+          - hint: 'Original text: )., key: 525'
+            label: Text
+            name: '525'
+            widget: string
+          - hint: 'Original text: Ember.js, key: 32b711d0'
+            label: Text
+            name: 32b711d0
+            widget: string
+          - hint: 'Original text: MUI, key: 12ba1'
+            label: Text
+            name: 12ba1
+            widget: string
+          - hint: 'Original text: And more!, key: 2edfdfc3'
+            label: Text
+            name: 2edfdfc3
+            widget: string
+          - hint: 'Original text: Pages-to-App Router Recipe., key: 638d99b1'
+            label: Text
+            name: 638d99b1
+            widget: string
+          - hint: >-
+              Original text: The App Router Recipe is a set of codemods that
+              assist you with the pages-to-app migration process., key: 31b9d752
+            label: Text
+            name: 31b9d752
+            widget: text
+          - hint: 'Original text: Run codemod →, key: 2b31aeb2'
+            label: Text
+            name: 2b31aeb2
+            widget: string
+          - hint: "Original text: App Controller Router Props Codemod +\_More., key: -1c22da29"
+            label: Text
+            name: '-1c22da29'
+            widget: string
+          - hint: >-
+              Original text: This codemod replaces all occurrences of , key:
+              -7b1772a8
+            label: Text
+            name: '-7b1772a8'
+            widget: string
+          - hint: 'Original text: this.currentRouteName, key: 43dbb44b'
+            label: Text
+            name: 43dbb44b
+            widget: string
+          - hint: 'Original text:  with , key: 3d597bfa'
+            label: Text
+            name: 3d597bfa
+            widget: string
+          - hint: 'Original text: this.router.currentRouteName, key: 62a4f7b0'
+            label: Text
+            name: 62a4f7b0
+            widget: string
+          - hint: 'Original text:  and , key: 1f0b149'
+            label: Text
+            name: 1f0b149
+            widget: string
+          - hint: 'Original text: this.currentPath, key: 5cf39ee'
+            label: Text
+            name: 5cf39ee
+            widget: string
+          - hint: 'Original text: this.router.currentPath, key: -63d75497'
+            label: Text
+            name: '-63d75497'
+            widget: string
+          - hint: 'Original text: Coming Soon., key: -733d8fcc'
+            label: Text
+            name: '-733d8fcc'
+            widget: string
+          - hint: 'Original text: Upvote , key: 56437c9b'
+            label: Text
+            name: 56437c9b
+            widget: string
+          - hint: 'Original text: Check out Codemod Registry , key: 79b0e94e'
+            label: Text
+            name: 79b0e94e
+            widget: string
+          - hint: 'Original text: Last updated: January 16, 2023, key: -395c97db'
+            label: Text
+            name: '-395c97db'
+            widget: string
+          - hint: >-
+              Original text: Please read these terms and conditions carefully
+              before using Our Service., key: -64902e12
+            label: Text
+            name: '-64902e12'
+            widget: string
+          - hint: >-
+              Original text: For the purposes of these Terms and Conditions:,
+              key: -4d81e101
+            label: Text
+            name: '-4d81e101'
+            widget: string
+          - hint: 'Original text: Affiliate, key: -29dc5ad3'
+            label: Text
+            name: '-29dc5ad3'
+            widget: string
+          - hint: >-
+              Original text:  means an entity that controls, is controlled by or
+              is under common control with a party, where "control" means
+              ownership of 50% or more of the shares, equity interest or other
+              securities entitled to vote for election of directors or other
+              managing authority., key: -64fbe080
+            label: Text
+            name: '-64fbe080'
+            widget: text
+          - hint: 'Original text: Terms and Conditions, key: -7ac7b766'
+            label: Text
+            name: '-7ac7b766'
+            widget: string
+          - hint: >-
+              Original text:  (also referred as "Terms") mean these Terms and
+              Conditions that form the entire agreement between You and the
+              Company regarding the use of the Service. This Terms and
+              Conditions agreement has been created with the help of the , key:
+              -1a000da1
+            label: Text
+            name: '-1a000da1'
+            widget: text
+          - hint: 'Original text: Free Terms and Conditions Generator, key: -558a253f'
+            label: Text
+            name: '-558a253f'
+            widget: string
+          - hint: 'Original text: Third-party Social Media Service, key: 716bc26'
+            label: Text
+            name: 716bc26
+            widget: string
+          - hint: >-
+              Original text:  means any services or content (including data,
+              information, products or services) provided by a third-party that
+              may be displayed, included or made available by the Service., key:
+              5b2e130c
+            label: Text
+            name: 5b2e130c
+            widget: text
+          - hint: 'Original text: https://deepcode.io, key: ec38773'
+            label: Text
+            name: ec38773
+            widget: string
+          - hint: 'Original text: Acknowledgment, key: 17fbfe7'
+            label: Text
+            name: 17fbfe7
+            widget: string
+          - hint: >-
+              Original text: These are the Terms and Conditions governing the
+              use of this Service and the agreement that operates between You
+              and the Company. These Terms and Conditions set out the rights and
+              obligations of all users regarding the use of the Service., key:
+              3ada0a2e
+            label: Text
+            name: 3ada0a2e
+            widget: text
+          - hint: >-
+              Original text: Your access to and use of the Service is
+              conditioned on Your acceptance of and compliance with these Terms
+              and Conditions. These Terms and Conditions apply to all visitors,
+              users and others who access or use the Service., key: 596bb4ba
+            label: Text
+            name: 596bb4ba
+            widget: text
+          - hint: >-
+              Original text: By accessing or using the Service You agree to be
+              bound by these Terms and Conditions. If You disagree with any part
+              of these Terms and Conditions then You may not access the
+              Service., key: 3d5670
+            label: Text
+            name: 3d5670
+            widget: text
+          - hint: >-
+              Original text: You represent that you are over the age of 18. The
+              Company does not permit those under 18 to use the Service., key:
+              -79da4622
+            label: Text
+            name: '-79da4622'
+            widget: text
+          - hint: >-
+              Original text: Your access to and use of the Service is also
+              conditioned on Your acceptance of and compliance with the Privacy
+              Policy of the Company. Our Privacy Policy describes Our policies
+              and procedures on the collection, use and disclosure of Your
+              personal information when You use the Application or the Website
+              and tells You about Your privacy rights and how the law protects
+              You. Please read Our Privacy Policy carefully before using Our
+              Service., key: 479f1dcd
+            label: Text
+            name: 479f1dcd
+            widget: text
+          - hint: >-
+              Original text: Our Service may contain links to third-party web
+              sites or services that are not owned or controlled by the
+              Company., key: -30ed397c
+            label: Text
+            name: '-30ed397c'
+            widget: text
+          - hint: >-
+              Original text: The Company has no control over, and assumes no
+              responsibility for, the content, privacy policies, or practices of
+              any third party web sites or services. You further acknowledge and
+              agree that the Company shall not be responsible or liable,
+              directly or indirectly, for any damage or loss caused or alleged
+              to be caused by or in connection with the use of or reliance on
+              any such content, goods or services available on or through any
+              such web sites or services., key: 5207fc3c
+            label: Text
+            name: 5207fc3c
+            widget: text
+          - hint: >-
+              Original text: We strongly advise You to read the terms and
+              conditions and privacy policies of any third-party web sites or
+              services that You visit., key: -c201879
+            label: Text
+            name: '-c201879'
+            widget: text
+          - hint: 'Original text: Termination, key: -ef1911c'
+            label: Text
+            name: '-ef1911c'
+            widget: string
+          - hint: >-
+              Original text: We may terminate or suspend Your access
+              immediately, without prior notice or liability, for any reason
+              whatsoever, including without limitation if You breach these Terms
+              and Conditions., key: 7379894c
+            label: Text
+            name: 7379894c
+            widget: text
+          - hint: >-
+              Original text: Upon termination, Your right to use the Service
+              will cease immediately., key: 6e708834
+            label: Text
+            name: '6e708834'
+            widget: string
+          - hint: 'Original text: Limitation of Liability, key: -516147f6'
+            label: Text
+            name: '-516147f6'
+            widget: string
+          - hint: >-
+              Original text: Notwithstanding any damages that You might incur,
+              the entire liability of the Company and any of its suppliers under
+              any provision of this Terms and Your exclusive remedy for all of
+              the foregoing shall be limited to the amount actually paid by You
+              through the Service or 100 USD if You haven't purchased anything
+              through the Service., key: -320bc567
+            label: Text
+            name: '-320bc567'
+            widget: text
+          - hint: >-
+              Original text: To the maximum extent permitted by applicable law,
+              in no event shall the Company or its suppliers be liable for any
+              special, incidental, indirect, or consequential damages whatsoever
+              (including, but not limited to, damages for loss of profits, loss
+              of data or other information, for business interruption, for
+              personal injury, loss of privacy arising out of or in any way
+              related to the use of or inability to use the Service, third-party
+              software and/or third-party hardware used with the Service, or
+              otherwise in connection with any provision of this Terms), even if
+              the Company or any supplier has been advised of the possibility of
+              such damages and even if the remedy fails of its essential
+              purpose., key: 2a4c4559
+            label: Text
+            name: 2a4c4559
+            widget: text
+          - hint: >-
+              Original text: Some states do not allow the exclusion of implied
+              warranties or limitation of liability for incidental or
+              consequential damages, which means that some of the above
+              limitations may not apply. In these states, each party's liability
+              will be limited to the greatest extent permitted by law., key:
+              55943cd1
+            label: Text
+            name: 55943cd1
+            widget: text
+          - hint: >-
+              Original text: "AS IS" and "AS AVAILABLE" Disclaimer, key:
+              62ce2e19
+            label: Text
+            name: 62ce2e19
+            widget: string
+          - hint: >-
+              Original text: The Service is provided to You "AS IS" and "AS
+              AVAILABLE" and with all faults and defects without warranty of any
+              kind. To the maximum extent permitted under applicable law, the
+              Company, on its own behalf and on behalf of its Affiliates and its
+              and their respective licensors and service providers, expressly
+              disclaims all warranties, whether express, implied, statutory or
+              otherwise, with respect to the Service, including all implied
+              warranties of merchantability, fitness for a particular purpose,
+              title and non-infringement, and warranties that may arise out of
+              course of dealing, course of performance, usage or trade practice.
+              Without limitation to the foregoing, the Company provides no
+              warranty or undertaking, and makes no representation of any kind
+              that the Service will meet Your requirements, achieve any intended
+              results, be compatible or work with any other software,
+              applications, systems or services, operate without interruption,
+              meet any performance or reliability standards or be error free or
+              that any errors or defects can or will be corrected., key:
+              -2cfc6482
+            label: Text
+            name: '-2cfc6482'
+            widget: text
+          - hint: >-
+              Original text: Without limiting the foregoing, neither the Company
+              nor any of the company's provider makes any representation or
+              warranty of any kind, express or implied: (i) as to the operation
+              or availability of the Service, or the information, content, and
+              materials or products included thereon; (ii) that the Service will
+              be uninterrupted or error-free; (iii) as to the accuracy,
+              reliability, or currency of any information or content provided
+              through the Service; or (iv) that the Service, its servers, the
+              content, or e-mails sent from or on behalf of the Company are free
+              of viruses, scripts, trojan horses, worms, malware, timebombs or
+              other harmful components., key: -5da7a4b3
+            label: Text
+            name: '-5da7a4b3'
+            widget: text
+          - hint: >-
+              Original text: Some jurisdictions do not allow the exclusion of
+              certain types of warranties or limitations on applicable statutory
+              rights of a consumer, so some or all of the above exclusions and
+              limitations may not apply to You. But in such a case the
+              exclusions and limitations set forth in this section shall be
+              applied to the greatest extent enforceable under applicable law.,
+              key: -5938616c
+            label: Text
+            name: '-5938616c'
+            widget: text
+          - hint: 'Original text: Governing Law, key: -6425354f'
+            label: Text
+            name: '-6425354f'
+            widget: string
+          - hint: >-
+              Original text: The laws of the Country, excluding its conflicts of
+              law rules, shall govern this Terms and Your use of the Service.
+              Your use of the Application may also be subject to other local,
+              state, national, or international laws., key: b209f26
+            label: Text
+            name: b209f26
+            widget: text
+          - hint: 'Original text: Disputes Resolution, key: -26790ac3'
+            label: Text
+            name: '-26790ac3'
+            widget: string
+          - hint: >-
+              Original text: If You have any concern or dispute about the
+              Service, You agree to first try to resolve the dispute informally
+              by contacting the Company., key: -5f1bb3e1
+            label: Text
+            name: '-5f1bb3e1'
+            widget: text
+          - hint: 'Original text: For European Union (EU) Users, key: -2dbe66bc'
+            label: Text
+            name: '-2dbe66bc'
+            widget: string
+          - hint: >-
+              Original text: If You are a European Union consumer, you will
+              benefit from any mandatory provisions of the law of the country in
+              which you are resident in., key: 250c5f6e
+            label: Text
+            name: 250c5f6e
+            widget: text
+          - hint: 'Original text: United States Legal Compliance, key: -4815257d'
+            label: Text
+            name: '-4815257d'
+            widget: string
+          - hint: >-
+              Original text: You represent and warrant that (i) You are not
+              located in a country that is subject to the United States
+              government embargo, or that has been designated by the United
+              States government as a "terrorist supporting" country, and (ii)
+              You are not listed on any United States government list of
+              prohibited or restricted parties., key: -4507c939
+            label: Text
+            name: '-4507c939'
+            widget: text
+          - hint: 'Original text: Severability and Waiver, key: -47613eac'
+            label: Text
+            name: '-47613eac'
+            widget: string
+          - hint: 'Original text: Severability, key: 5064c419'
+            label: Text
+            name: 5064c419
+            widget: string
+          - hint: >-
+              Original text: If any provision of these Terms is held to be
+              unenforceable or invalid, such provision will be changed and
+              interpreted to accomplish the objectives of such provision to the
+              greatest extent possible under applicable law and the remaining
+              provisions will continue in full force and effect., key: -2df6e78a
+            label: Text
+            name: '-2df6e78a'
+            widget: text
+          - hint: 'Original text: Waiver, key: -6601f77c'
+            label: Text
+            name: '-6601f77c'
+            widget: string
+          - hint: >-
+              Original text: Except as provided herein, the failure to exercise
+              a right or to require performance of an obligation under these
+              Terms shall not effect a party's ability to exercise such right or
+              require such performance at any time thereafter nor shall the
+              waiver of a breach constitute a waiver of any subsequent breach.,
+              key: -61e7e694
+            label: Text
+            name: '-61e7e694'
+            widget: text
+          - hint: 'Original text: Translation Interpretation, key: -10a7869'
+            label: Text
+            name: '-10a7869'
+            widget: string
+          - hint: >-
+              Original text: These Terms and Conditions may have been translated
+              if We have made them available to You on our Service. You agree
+              that the original English text shall prevail in the case of a
+              dispute., key: 63a78ecb
+            label: Text
+            name: 63a78ecb
+            widget: text
+          - hint: >-
+              Original text: Changes to These Terms and Conditions, key:
+              -6bb5dc1
+            label: Text
+            name: '-6bb5dc1'
+            widget: string
+          - hint: >-
+              Original text: We reserve the right, at Our sole discretion, to
+              modify or replace these Terms at any time. If a revision is
+              material We will make reasonable efforts to provide at least 30
+              days' notice prior to any new terms taking effect. What
+              constitutes a material change will be determined at Our sole
+              discretion., key: -4ef82e8b
+            label: Text
+            name: '-4ef82e8b'
+            widget: text
+          - hint: >-
+              Original text: By continuing to access or use Our Service after
+              those revisions become effective, You agree to be bound by the
+              revised terms. If You do not agree to the new terms, in whole or
+              in part, please stop using the website and the Service., key:
+              -779f3daf
+            label: Text
+            name: '-779f3daf'
+            widget: text
+          - hint: >-
+              Original text: If you have any questions about these Terms and
+              Conditions, You can contact us:, key: -514ac1ee
+            label: Text
+            name: '-514ac1ee'
+            widget: string
+          - hint: "Original text: Need help with migrating your project?\_Get in touch with our migration experts that will help your team adopt the latest cutting-edge stacks., key: 4e6283a6"
+            label: Text
+            name: 4e6283a6
+            widget: text
+          - hint: 'Original text: Select one, key: 14066d62'
+            label: Text
+            name: 14066d62
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /migrations/, key: -3dea1d25'
+            label: Link
+            name: '-3dea1d25'
+            widget: string
+          - hint: 'Original link: https://codemod.studio/, key: -5be4108f'
+            label: Link
+            name: '-5be4108f'
+            widget: string
+          - hint: 'Original link: /automations/, key: -321e94de'
+            label: Link
+            name: '-321e94de'
+            widget: string
+          - hint: >-
+              Original link:
+              https://marketplace.visualstudio.com/items?itemName=Deepcode.deepcode-vscode-extension,
+              key: -3f316fbd
+            label: Link
+            name: '-3f316fbd'
+            widget: string
+          - hint: >-
+              Original link: https://docs.deepcode.io/docs/cli/quickstart, key:
+              52ce7af1
+            label: Link
+            name: 52ce7af1
+            widget: string
+          - hint: 'Original link: /pricing/, key: -d9445a8'
+            label: Link
+            name: '-d9445a8'
+            widget: string
+          - hint: 'Original link: https://docs.deepcode.io, key: -599fd5b8'
+            label: Link
+            name: '-599fd5b8'
+            widget: string
+          - hint: >-
+              Original link:
+              https://deepcode.notion.site/Join-Deepcode-b9c9bf82d38341f8936744b6aac20dba,
+              key: 6dcf58d9
+            label: Link
+            name: 6dcf58d9
+            widget: string
+          - hint: 'Original link: https://docs.deepcode.io/blog, key: 7ecb8309'
+            label: Link
+            name: 7ecb8309
+            widget: string
+          - hint: 'Original link: https://github.com/deepcode-ai/, key: 20f6ac18'
+            label: Link
+            name: 20f6ac18
+            widget: string
+          - hint: 'Original link: /contact/, key: 16bdc13e'
+            label: Link
+            name: 16bdc13e
+            widget: string
+          - hint: 'Original link: #codemod-studio-section, key: 3fe998a9'
+            label: Link
+            name: 3fe998a9
+            widget: string
+          - hint: >-
+              Original link: https://docs.deepcode.io/blog/dream-migration, key:
+              -74e03c82
+            label: Link
+            name: '-74e03c82'
+            widget: string
+          - hint: 'Original link: #cli-vsce-section, key: -25c3bb59'
+            label: Link
+            name: '-25c3bb59'
+            widget: string
+          - hint: 'Original link: mailto:hello@deepcode.io, key: -6ade3066'
+            label: Link
+            name: '-6ade3066'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/codemod-studio/quickstart, key:
+              -3a123b97
+            label: Link
+            name: '-3a123b97'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/vs-code-extension/quickstart, key:
+              -402fab7e
+            label: Link
+            name: '-402fab7e'
+            widget: string
+          - hint: 'Original link: https://www.deepcode.io/community, key: -68d3b33c'
+            label: Link
+            name: '-68d3b33c'
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: /company/privacy-policy/, key: 52569957'
+            label: Link
+            name: '52569957'
+            widget: string
+          - hint: 'Original link: /company/terms-conditions/, key: 4772a6d0'
+            label: Link
+            name: 4772a6d0
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/telemetry-compliance,
+              key: 7fe45151
+            label: Link
+            name: 7fe45151
+            widget: string
+          - hint: >-
+              Original link:
+              https://join.slack.com/t/deepcode-ai/shared_invite/zt-1bjj5exxi-95yPfWi71HcO2p_sS5L2wA,
+              key: 4c77e47b
+            label: Link
+            name: 4c77e47b
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/company/deepcode-ai/, key:
+              -e3381a8
+            label: Link
+            name: '-e3381a8'
+            widget: string
+          - hint: 'Original link: https://twitter.com/deepcode_io, key: -63fe80f3'
+            label: Link
+            name: '-63fe80f3'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/codemod-registry/intro, key: 77e5bfff
+            label: Link
+            name: 77e5bfff
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/cli/quickstart#install-cli, key:
+              153c0b5c
+            label: Link
+            name: 153c0b5c
+            widget: string
+          - hint: 'Original link: https://feedback.deepcode.io/, key: -ab64f'
+            label: Link
+            name: '-ab64f'
+            widget: string
+          - hint: 'Original link: #migration-hook, key: -491d655b'
+            label: Link
+            name: '-491d655b'
+            widget: string
+          - hint: >-
+              Original link: https://github.com/deepcode-ai/codemod-registry,
+              key: -2ab382d3
+            label: Link
+            name: '-2ab382d3'
+            widget: string
+          - hint: 'Original link: mailto:migrate@deepcode.io, key: 95edf21'
+            label: Link
+            name: 95edf21
+            widget: string
+          - hint: 'Original link: https://deepcode.io/community, key: -4abbf7b3'
+            label: Link
+            name: '-4abbf7b3'
+            widget: string
+          - hint: 'Original link: https://cal.com/deepcode, key: -36ff12ed'
+            label: Link
+            name: '-36ff12ed'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.freeprivacypolicy.com/free-privacy-policy-generator/,
+              key: -7e2795bb
+            label: Link
+            name: '-7e2795bb'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#interpretation,
+              key: 6cdaf492
+            label: Link
+            name: 6cdaf492
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#definitions,
+              key: 52323f36
+            label: Link
+            name: 52323f36
+            widget: string
+          - hint: 'Original link: https://deepcode.io/, key: -365298e4'
+            label: Link
+            name: '-365298e4'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#types-of-data-collected,
+              key: 6a6b1bfe
+            label: Link
+            name: 6a6b1bfe
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#personal-data,
+              key: -d99f8b3
+            label: Link
+            name: '-d99f8b3'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#usage-data,
+              key: 1db517e0
+            label: Link
+            name: 1db517e0
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#tracking-technologies-and-cookies,
+              key: -5b6dee7e
+            label: Link
+            name: '-5b6dee7e'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.freeprivacypolicy.com/blog/sample-privacy-policy-template/#Use_Of_Cookies_And_Tracking,
+              key: 7528b065
+            label: Link
+            name: 7528b065
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#use-of-your-personal-data,
+              key: 7d6d6223
+            label: Link
+            name: 7d6d6223
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#retention-of-your-personal-data,
+              key: 22bb5ffa
+            label: Link
+            name: 22bb5ffa
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#transfer-of-your-personal-data,
+              key: 72cf1cdb
+            label: Link
+            name: 72cf1cdb
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#delete-your-personal-data,
+              key: -45e6926b
+            label: Link
+            name: '-45e6926b'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#disclosure-of-your-personal-data,
+              key: -14df923
+            label: Link
+            name: '-14df923'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#business-transactions,
+              key: -958db88
+            label: Link
+            name: '-958db88'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#law-enforcement,
+              key: 1cb1a34b
+            label: Link
+            name: 1cb1a34b
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#other-legal-requirements,
+              key: 562e470b
+            label: Link
+            name: 562e470b
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/privacy-policy#security-of-your-personal-data,
+              key: 22177e70
+            label: Link
+            name: '22177e70'
+            widget: string
+          - hint: 'Original link: mailto:privacy@deepcode.io, key: 1acc3524'
+            label: Link
+            name: 1acc3524
+            widget: string
+          - hint: >-
+              Original link: http://tinyurl.com/app-router-recipe, key:
+              -24bd1239
+            label: Link
+            name: '-24bd1239'
+            widget: string
+          - hint: >-
+              Original link: http://tinyurl.com/ember-app-controller-props, key:
+              -4366e170
+            label: Link
+            name: '-4366e170'
+            widget: string
+          - hint: >-
+              Original link:
+              https://feedback.deepcode.io/codemod-requests/p/mui-v4-to-v5, key:
+              57a450cf
+            label: Link
+            name: 57a450cf
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/terms-and-conditions#interpretation,
+              key: -39232deb
+            label: Link
+            name: '-39232deb'
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/terms-and-conditions#definitions,
+              key: -71a5f76d
+            label: Link
+            name: '-71a5f76d'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.freeprivacypolicy.com/free-terms-and-conditions-generator/,
+              key: 538b5588
+            label: Link
+            name: 538b5588
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/terms-and-conditions#severability,
+              key: 7d6f3f46
+            label: Link
+            name: 7d6f3f46
+            widget: string
+          - hint: >-
+              Original link:
+              https://docs.deepcode.io/docs/about-deepcode/legal/terms-and-conditions#waiver,
+              key: -6d64568f
+            label: Link
+            name: '-6d64568f'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: i5c48b07c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2973175a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i3e6e1585
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i64b28513
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i21276752
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5c2f0f5c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2449300f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5418dd34
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3cb3d212'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-24f412c4'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '36323758'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2ba1d697'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 661769c8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 20fd9a0b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-52fe1ca1'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4b5242ee
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 84efe4c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3fa43d88
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-178a07a7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5596f058
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '37681039'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-65a8ff64'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4b87846'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-b82ad98'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-321111e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 52a25191
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5e4a64a7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 64290f27
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: b583c18
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-75048ac5'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2f6e845a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3224e8b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-58dc0911'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-267be297'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-775b37d0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4741a959'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 55e4d5a0
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 299fc6c3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-81c5f39'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-721c180b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1d3bc06a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-38eea61f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-38e22e6e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6218d6bd'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-224d1d8'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-59d0a9be'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4e02f435
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 112b5d64
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '5367683'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4b6c3cba'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6307da46
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2ce8a2a5'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3b599675'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '2173831'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3f06943'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 59f51b3b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 40387a34
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4d3be6d6'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-11af22b4'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6fb100ea'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5a5fc53f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '1314866'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 62ceb3c0
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-65a81ead'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5a9d0d0c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-46d1db74'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1253a3fd'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6fc3bea'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7a7dc765'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+local_backend: true
+publish_mode: editorial_workflow
