@@ -1,0 +1,45 @@
+name: My Workflow
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: 'data-netlify="true"'
+          replace: " "
+          regex: false
+          include: 'theme/migrations.html'
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: 'data-netlify="true"'
+          replace: " "
+          regex: false
+          include: 'theme/automations.html'
+      - name: Find and Replace
+        uses: nguyenvanuyn96/str-find-and-replace-action@master
+        with:
+          find: '<script type="module">import\*as UdeslyBanner from"https://cdn\.jsdelivr\.net/npm/udesly-ad-banner@0\.0\.4/loader/index\.js";UdeslyBanner\.defineCustomElements\(\),document\.body\.append\(document\.createElement\("udesly-banner"\)\);</script>'
+          replace: ""
+      - name: Find and Replace
+        uses: nguyenvanuyn96/str-find-and-replace-action@master
+        with:
+          find: '<script src="/assets/js/udesly-11ty\.min\.js" async="" defer=""></script>\{\{ settings\.site\.footer_additional_content \}\}<script type="module">import\*as UdeslyBanner from"https://cdn\.jsdelivr\.net/npm/udesly-ad-banner@0\.0\.1/loader/index\.js";UdeslyBanner\.defineCustomElements\(\),document\.body\.append\(document\.createElement\("udesly-banner"\)\);</script>'
+          replace: ""
+      - name: Find and Replace
+        uses: nguyenvanuyn96/str-find-and-replace-action@master
+        with:
+          find: '<script type="module">import\*as UdeslyBanner from"https://cdn\.jsdelivr\.net/npm/udesly-ad-banner@0\.0\.1/loader/index\.js";UdeslyBanner\.defineCustomElements\(\),document\.body\.append\(document\.createElement\("udesly-banner"\)\);</script>'
+          replace: ""
+      - name: Find and Replace
+        uses: nguyenvanuyn96/str-find-and-replace-action@master
+        with:
+          find: '<script src="https://identity\.netlify\.com/v1/netlify-identity-widget\.js"></script>'
+          replace: '<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" async></script>'
+      - name: push
+        uses: actions-x/commit@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
